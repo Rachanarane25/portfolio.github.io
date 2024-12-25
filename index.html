@@ -6,6 +6,90 @@
     <title>Portfolio</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Styling for the entire body */
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        /* Header styles */
+        header {
+            text-align: center;
+            padding: 20px;
+            background-color: #0056b3;
+            color: white;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            margin: 0;
+        }
+
+        /* Section styles */
+        section {
+            max-width: 800px;
+            margin: 30px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            margin-bottom: 15px;
+            color: #0056b3;
+        }
+
+        ul, dl {
+            margin-left: 20px;
+        }
+
+        /* Styling for tab buttons */
+        .tab-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .tab-buttons a {
+            display: inline-block;
+            text-decoration: none;
+            text-align: center;
+            background-color: #0056b3;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .tab-buttons a:hover {
+            background-color: #003d82;
+            transform: translateY(-2px);
+        }
+
+        /* Blockquote styling */
+        blockquote {
+            margin-top: 30px;
+            font-size: 1.2rem;
+            font-style: italic;
+            color: #555;
+            border-left: 4px solid #0056b3;
+            padding-left: 15px;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -16,8 +100,8 @@
     <section>
         <h2>🛠️ Projects</h2>
         <ul>
-            <li><strong>Project 1</strong>: A short description of your project1.</li>
-            <li><strong>Project 2</strong>: A short description of another project2.</li>
+            <li><strong>Project 1:</strong> A short description of your project1.</li>
+            <li><strong>Project 2:</strong> A short description of another project2.</li>
         </ul>
 
         <h2>🚀 Skills</h2>
@@ -32,7 +116,7 @@
             <li><a href="https://linkedin.com/in/your-linkedin-profile" target="_blank">LinkedIn</a></li>
         </ul>
 
-        <h2>Portfolio Topic</h2>
+        <h2>Portfolio Details</h2>
         <dl>
             <dt>Course Name</dt>
             <dd>Algorithmic Problem Solving</dd>
@@ -43,30 +127,26 @@
             <dt>Name</dt>
             <dd>RACHANA RANE</dd>
 
-            
-            <dd>Your SRN</dd>
-            <dt>01FE23BCS150</dt>
+            <dt>Your SRN</dt>
+            <dd>01FE23BCS150</dd>
 
             <dt>Course Instructor</dt>
             <dd>MALLIKARJUN AKKI SIR</dd>
 
             <dt>University</dt>
-            <dd>KLE TECHNOLOGICAL UNIVERSITY,HUBBALI</dd>
+            <dd>KLE TECHNOLOGICAL UNIVERSITY, HUBBALI</dd>
 
             <dt>Portfolio Topic/Domain</dt>
             <dd>Google</dd>  
-
-            <a href="course-learning-reflection.html">Course Learning Reflection</a>  
-
-            <a href="business-cases.html">business cases</a>
-
-
         </dl>
+
+        <!-- Tab Buttons -->
+        <div class="tab-buttons">
+            <a href="course-learning-reflection.html">📘 Course Learning Reflection</a>
+            <a href="business-cases.html">📂 Business Cases</a>
+        </div>
 
         <blockquote>“The only way to do great work is to love what you do.” – Steve Jobs</blockquote>
     </section>
 </body>
 </html>
-
-
-

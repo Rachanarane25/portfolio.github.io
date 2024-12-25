@@ -3,26 +3,142 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HI Example</title>
+  <title>Algorithm Concepts and Applications</title>
   <style>
     body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      background-color: #f0f8ff;
       font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 20px;
+      padding: 0 10%;
+      background-color: #f9f9f9;
+      color: #333;
     }
-    .hi-text {
-      font-size: 100px;
-      font-weight: bold;
-      color: #ff4500;
-      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    h1, h2, h3 {
+      color: #0056b3;
+    }
+    ul {
+      margin-left: 20px;
+    }
+    p {
+      margin: 10px 0;
     }
   </style>
 </head>
 <body>
-  <div class="hi-text">HI</div>
+  <h1>Algorithm Concepts and Applications</h1>
+  
+  <h2>Kinds of Problems in Nature</h2>
+  <p>We can observe many different problems in nature that relate to iterations, recursion, and backtracking:</p>
+  <ul>
+    <li>Change in seasons (iteration) happens in a cycle throughout the year.</li>
+    <li>Growth of cabbage leaves forming layers can be related to recursion.</li>
+    <li>Ants exploring their territory and returning home relate to backtracking.</li>
+  </ul>
+
+  <h2>Space and Time Efficiency</h2>
+  <p>
+    <strong>Space Complexity:</strong> Extra space taken by an algorithm to execute.<br>
+    <strong>Time Complexity:</strong> Time taken by an algorithm to execute.
+  </p>
+  <p>These are essential for evaluating the efficiency of algorithms and determining suitability for specific applications.</p>
+  <h3>Orders of Growth</h3>
+  <ul>
+    <li>O(1) -> Constant order of growth</li>
+    <li>O(n) -> Linear order of growth</li>
+    <li>O(log n) -> Logarithmic order of growth</li>
+  </ul>
+
+  <h2>Takeaway from Design Principles (Chapter 2)</h2>
+  <p>Studying different algorithms has provided key insights:</p>
+  <ul>
+    <li>AVL and Red-Black trees maintain balance, highlighting the importance of structure.</li>
+    <li>DFS (brave travel) and BFS (cautious travel) solve graph traversal problems effectively.</li>
+    <li>Sorting algorithms like divide-and-conquer enhance understanding of logic in data operations.</li>
+  </ul>
+
+  <h2>Hierarchical Data and Tree Structures</h2>
+  <p>Tree structures optimize problem-solving for hierarchical data:</p>
+  <ul>
+    <li><strong>Binary Search Tree (BST):</strong> Ordered roots improve searching but lack balance.</li>
+    <li><strong>2-3 Tree:</strong> Keeps leaf nodes at the same level to maintain balance.</li>
+    <li><strong>AVL Tree:</strong> Balances the tree using rotations.</li>
+    <li><strong>Red-Black Tree:</strong> Reduces rotations while maintaining balance.</li>
+    <li><strong>Heap:</strong> Complete binary tree ensuring heap property, ideal for priority queues.</li>
+    <li><strong>Trie:</strong> Efficient for string tasks like autocomplete and prefix search.</li>
+  </ul>
+
+  <h2>Array Query Algorithms</h2>
+  <p>Array queries are necessary for efficiently handling large datasets with frequent updates:</p>
+  <ul>
+    <li><strong>Lookup Tables:</strong> Precompute and store results for fast retrieval.</li>
+    <li><strong>Segment Trees:</strong> Useful for efficient updates and range queries.</li>
+    <li><strong>Binary Indexed Tree (BIT):</strong> Simpler alternative for range queries based on isolating the last bit.</li>
+  </ul>
+
+  <h2>Tree vs. Graphs and Their Traversals</h2>
+  <p>Key differences between trees and graphs:</p>
+  <ul>
+    <li><strong>Tree:</strong> Hierarchical structure with one root node and no cycles.</li>
+    <li><strong>Graph:</strong> Set of nodes connected by edges, can have cycles.</li>
+  </ul>
+  <h3>Traversals</h3>
+  <p><strong>Tree Traversal:</strong></p>
+  <ul>
+    <li>Pre-order</li>
+    <li>In-order</li>
+    <li>Post-order</li>
+  </ul>
+  <p><strong>Graph Traversal:</strong></p>
+  <ul>
+    <li>DFS (Depth First Search): Brave Traversal</li>
+    <li>BFS (Breadth First Search): Cautious Traversal</li>
+  </ul>
+  <p>Applications:</p>
+  <ul>
+    <li>Trees: Represent hierarchical data, search shortest path, sorting.</li>
+    <li>Graphs: Finding shortest paths and other connected problems.</li>
+  </ul>
+
+  <h2>Sorting and Searching Algorithms</h2>
+  <p>Sorting and searching are crucial for organizing and locating data:</p>
+  <ul>
+    <li><strong>Sorting Algorithms:</strong> Quick sort, Merge sort are used in organizing e-commerce products.</li>
+    <li><strong>Searching Algorithms:</strong> Binary search is used in search engines.</li>
+  </ul>
+
+  <h2>Importance of Graph Algorithms</h2>
+  <p>Graph algorithms are essential for:</p>
+  <ul>
+    <li><strong>Spanning Trees:</strong> Calculate MST (Minimum Spanning Tree) to connect all nodes with the least cost (e.g., laying roads or pipelines).</li>
+    <li><strong>Shortest Path:</strong> Dijkstra's algorithm is used in GPS navigation apps.</li>
+  </ul>
+
+  <h2>Algorithm Design Techniques</h2>
+  <p>Key algorithm design techniques studied:</p>
+  <ul>
+    <li><strong>Backtracking:</strong> Explore all possible solutions, prune invalid ones (e.g., N-Queens problem).</li>
+    <li><strong>Sorting Algorithms:</strong>
+      <ul>
+        <li>Divide and conquer: Quick Sort, Merge Sort</li>
+        <li>Comparison-based: Selection Sort, Insertion Sort, Bubble Sort</li>
+      </ul>
+    </li>
+    <li><strong>Brute Force:</strong> Try all possible solutions (e.g., exhaustive search).</li>
+    <li><strong>String Search Algorithms:</strong>
+      <ul>
+        <li>Boyer-Moore</li>
+        <li>Knuth-Morris-Pratt</li>
+        <li>Rabin-Karp</li>
+      </ul>
+    </li>
+    <li><strong>Shortest Path Algorithms:</strong>
+      <ul>
+        <li>Dijkstra's</li>
+        <li>Floyd's</li>
+        <li>Warshall's</li>
+        <li>Prim's</li>
+      </ul>
+    </li>
+  </ul>
 </body>
 </html>

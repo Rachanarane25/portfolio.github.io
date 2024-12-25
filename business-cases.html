@@ -3,31 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Urban Maintenance & Cable Network Management</title>
+    <title>Urban Solutions and Algorithms</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
-            line-height: 1.6;
         }
         h1 {
             font-size: 32px;
             text-align: left;
-            color: #333;
         }
         h2 {
             font-size: 24px;
             font-weight: normal;
-            margin-top: 20px;
-            color: #555;
         }
         .key-aspects {
             font-size: 18px;
-            margin-left: 20px;
         }
         .highlight {
             font-size: 18px;
             font-weight: normal;
+            color: blue;
         }
         .highlight b {
             font-weight: bold;
@@ -40,74 +36,158 @@
             border-radius: 5px;
             display: block;
             width: fit-content;
-            margin-top: 10px;
-        }
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
         }
         .section {
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <!-- Job Allocation for Urban Maintenance Section -->
-        <div class="section">
-            <h1>Job Allocation for Urban Maintenance</h1>
+    <h1>Urban Solutions and Algorithms</h1>
 
-            <p class="highlight">Job Allocation for Urban Maintenance involves assigning tasks like road repairs, garbage collection, and utility maintenance based on priority. The heap allows efficient access to the highest-priority job, as the root node always holds the job with the highest priority. Using a heap data structure, jobs are inserted with priority values, and the highest-priority job is always at the root. The root is extracted to allocate the most important jobs first. This method ensures efficient job scheduling with O(log n) time complexity for both insertion and extraction, making it faster than sorting for large datasets.</p>
-
-            <h2>Key Aspects</h2>
-            <ul class="key-aspects">
-                <li><b>Prioritizing Tasks</b>: Assigning higher priority to urgent or important jobs like repairing roads that may impact traffic.</li>
-                <li><b>Resource Allocation</b>: Ensuring that workers, equipment, and materials are available and scheduled for tasks.</li>
-                <li><b>Optimizing Workflows</b>: Minimizing delays and resource waste by organizing jobs in a logical sequence.</li>
-            </ul>
-
-            <p class="highlight"><b>Time Complexity:</b> O(log n)</p>
-            <p class="highlight"><b>Space Complexity:</b> O(n)</p>
-
-            <p class="highlight">Code:</p>
-            <div class="code">
-                <!-- Example code for heap-related job allocation -->
-                <p>Insert heap-related code here if needed</p>
-            </div>
-        </div>
-
-        <!-- Efficient Cable Network Management Section -->
-        <div class="section">
-            <h1>Efficient Cable Network Management</h1>
-
-            <p class="highlight">Efficient cable network management is a critical problem in urban areas where a vast amount of data, telecommunications, and power lines need to be organized and optimized. The goal is to minimize costs, maximize performance, and ensure redundancy for reliability.</p>
-            <p class="highlight">To solve Efficient Cable Network Management using graphs, we treat the network as a graph where each building, switch, or node is a vertex, and each cable or connection between nodes is an edge. The objective is to design and manage the network efficiently by minimizing the total cost, ensuring connectivity, and optimizing for performance and redundancy.</p>
-
-            <h2>Key Aspects</h2>
-            <ul class="key-aspects">
-                <li><strong>Finds the shortest path</strong> between nodes, ensuring the most efficient cable routing and data transmission paths.</li>
-                <li><strong>Optimizing performance and redundancy,</strong> ensuring that the network is both fast and resilient to failure.</li>
-            </ul>
-
-            <h2>Time and Space Complexity</h2>
-            <p><strong>Time Complexity:</strong> O(V²)</p>
-            <p><strong>Space Complexity:</strong> O(V + E)</p>
-
-            <h2>Code Example</h2>
+    <div class="section">
+        <h2>1. Job Allocation for Urban Maintenance</h2>
+        <p class="highlight"><b>Key Aspects:</b></p>
+        <ul class="key-aspects">
+            <li class="highlight">Prioritizing Tasks: Assigning higher priority to urgent or important jobs like repairing roads that may impact traffic.</li>
+            <li>Resource Allocation: Ensuring that workers, equipment, and materials are available and scheduled for tasks.</li>
+            <li>Optimizing Workflows: Minimizing delays and resource waste by organizing jobs in a logical sequence.</li>
+        </ul>
+        <p><b>Time Complexity:</b> O(log n)</p>
+        <p><b>Space Complexity:</b> O(n)</p>
+        <div class="code">
+            <p><b>Code:</b></p>
             <pre>
-                <code>
-                    // Example pseudocode for Efficient Cable Network Management
-                    function dijkstra(graph, source) {
-                        // Code for Dijkstra's algorithm to find the shortest path
-                        ...
-                    }
-                    
-                    function kruskal(graph) {
-                        // Code for Kruskal's algorithm to find the minimum spanning tree
-                        ...
-                    }
-                </code>
+function allocateJobs(jobs) {
+    // Example code for heap-based allocation
+    let heap = new MinHeap();
+    jobs.forEach(job => heap.insert(job));
+    let jobToAllocate = heap.extractRoot();
+    console.log('Allocating job:', jobToAllocate);
+}
+            </pre>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>2. Efficient Cable Network Management</h2>
+        <p class="highlight"><b>Key Aspects:</b></p>
+        <ul class="key-aspects">
+            <li>Finds the shortest path between nodes, ensuring the most efficient cable routing and data transmission paths.</li>
+            <li class="highlight">Optimizing performance and redundancy, ensuring that the network is both fast and resilient to failure.</li>
+        </ul>
+        <p><b>Time Complexity:</b> O(V²)</p>
+        <p><b>Space Complexity:</b> O(V + E)</p>
+        <div class="code">
+            <p><b>Code:</b></p>
+            <pre>
+function manageNetwork(graph) {
+    // Code for finding shortest path using Dijkstra or other algorithms
+    let distance = Array(graph.length).fill(Infinity);
+    distance[0] = 0; // Starting point
+    for (let i = 0; i < graph.length; i++) {
+        for (let j = 0; j < graph[i].length; j++) {
+            if (distance[j] > distance[i] + graph[i][j]) {
+                distance[j] = distance[i] + graph[i][j];
+            }
+        }
+    }
+    console.log('Shortest paths:', distance);
+}
+            </pre>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>3. E-commerce & Online Marketplaces</h2>
+        <p class="highlight"><b>Key Aspects:</b></p>
+        <ul class="key-aspects">
+            <li>Organizes products based on different attributes such as price, ratings, or names.</li>
+            <li class="highlight">Helps users quickly navigate through sorted lists, improving discoverability.</li>
+            <li>Increases user engagement by offering personalized product recommendations.</li>
+            <li>Improves conversion rates and sales by displaying products relevant to individual users.</li>
+        </ul>
+        <p><b>Time Complexity:</b> O(log n)</p>
+        <p><b>Space Complexity:</b> O(log n)</p>
+        <div class="code">
+            <p><b>Code:</b></p>
+            <pre>
+function binarySearch(arr, target) {
+    let left = 0, right = arr.length - 1;
+    while (left <= right) {
+        let mid = Math.floor((left + right) / 2);
+        if (arr[mid] === target) return mid;
+        if (arr[mid] < target) left = mid + 1;
+        else right = mid - 1;
+    }
+    return -1;
+}
+            </pre>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>4. Education & Vocational Training Centers</h2>
+        <p class="highlight"><b>Key Aspects:</b></p>
+        <ul class="key-aspects">
+            <li>Finds the shortest paths between all pairs of locations (towns and centers).</li>
+            <li>Helps in determining the best placement of centers for maximum accessibility.</li>
+            <li class="highlight">Ensures minimal travel time for individuals to reach their nearest center.</li>
+        </ul>
+        <p><b>Time Complexity:</b> O(V³)</p>
+        <p><b>Space Complexity:</b> O(V²)</p>
+        <div class="code">
+            <p><b>Code:</b></p>
+            <pre>
+function floydWarshall(graph) {
+    let dist = [];
+    let V = graph.length;
+    for (let i = 0; i < V; i++) {
+        dist[i] = [];
+        for (let j = 0; j < V; j++) {
+            dist[i][j] = graph[i][j];
+        }
+    }
+    for (let k = 0; k < V; k++) {
+        for (let i = 0; i < V; i++) {
+            for (let j = 0; j < V; j++) {
+                if (dist[i][j] > dist[i][k] + dist[k][j]) {
+                    dist[i][j] = dist[i][k] + dist[k][j];
+                }
+            }
+        }
+    }
+    console.log('Shortest paths:', dist);
+}
+            </pre>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>5. Microfinance or Lending Services</h2>
+        <p class="highlight"><b>Key Aspects:</b></p>
+        <ul class="key-aspects">
+            <li class="highlight">Quick Sort divides the array into two sub-arrays around a pivot element and recursively sorts them.</li>
+            <li>Quick Sort sorts the array without needing extra memory, as it swaps elements within the array, making it space efficient.</li>
+            <li>The algorithm performs well on large datasets, making it ideal for sorting applicants based on their credit score, loan amount, or urgency.</li>
+        </ul>
+        <p><b>Time Complexity:</b> O(n log n)</p>
+        <p><b>Space Complexity:</b> O(log n)</p>
+        <div class="code">
+            <p><b>Code:</b></p>
+            <pre>
+function quickSort(arr) {
+    if (arr.length <= 1) return arr;
+    let pivot = arr[arr.length - 1];
+    let left = [];
+    let right = [];
+    for (let i = 0; i < arr.length - 1; i++) {
+        if (arr[i] < pivot) left.push(arr[i]);
+        else right.push(arr[i]);
+    }
+    return [...quickSort(left), pivot, ...quickSort(right)];
+}
             </pre>
         </div>
     </div>

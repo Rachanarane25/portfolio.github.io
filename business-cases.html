@@ -3,194 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Urban Solutions and Algorithms</title>
+    <title>Business Cases</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
         }
         h1 {
-            font-size: 32px;
-            text-align: left;
-        }
-        h2 {
-            font-size: 24px;
-            font-weight: normal;
-        }
-        .key-aspects {
-            font-size: 18px;
+            text-align: center;
+            font-weight: bold;
+            text-decoration: underline;
+            font-size: 2em;
+            margin-top: 20px;
         }
         .highlight {
-            font-size: 18px;
-            font-weight: normal;
-            color: blue;
-        }
-        .highlight b {
             font-weight: bold;
-        }
-        .code {
-            font-family: monospace;
-            font-size: 16px;
-            background-color: #f4f4f4;
-            padding: 10px;
-            border-radius: 5px;
+            text-align: left;
             display: block;
-            width: fit-content;
+            margin-left: 20px;
         }
         .section {
-            margin-bottom: 30px;
+            margin: 20px;
         }
     </style>
 </head>
 <body>
 
-    <h1>Urban Solutions and Algorithms</h1>
+<h1>Business Cases</h1>
 
-    <div class="section">
-        <h2>1. Job Allocation for Urban Maintenance</h2>
-        <p class="highlight"><b>Key Aspects:</b></p>
-        <ul class="key-aspects">
-            <li class="highlight">Prioritizing Tasks: Assigning higher priority to urgent or important jobs like repairing roads that may impact traffic.</li>
-            <li>Resource Allocation: Ensuring that workers, equipment, and materials are available and scheduled for tasks.</li>
-            <li>Optimizing Workflows: Minimizing delays and resource waste by organizing jobs in a logical sequence.</li>
-        </ul>
-        <p><b>Time Complexity:</b> O(log n)</p>
-        <p><b>Space Complexity:</b> O(n)</p>
-        <div class="code">
-            <p><b>Code:</b></p>
-            <pre>
-function allocateJobs(jobs) {
-    // Example code for heap-based allocation
-    let heap = new MinHeap();
-    jobs.forEach(job => heap.insert(job));
-    let jobToAllocate = heap.extractRoot();
-    console.log('Allocating job:', jobToAllocate);
-}
-            </pre>
-        </div>
-    </div>
+<div class="section">
+    <p class="highlight">1. Job Allocation for Urban Maintenance</p>
+    <p>Job Allocation for Urban Maintenance involves assigning tasks like road repairs, garbage collection, and utility maintenance based on priority. The heap allows efficient access to the highest-priority job, as the root node always holds the job with the highest priority. Using a heap data structure, jobs are inserted with priority values, and the highest-priority job is always at the root. The root is extracted to allocate the most important jobs first. This method ensures efficient job scheduling with O(log n) time complexity for both insertion and extraction, making it faster than sorting for large datasets.</p>
+    <p class="highlight">Key aspects:</p>
+    <ul>
+        <li>Prioritizing Tasks: Assigning higher priority to urgent or important jobs like repairing roads that may impact traffic.</li>
+        <li>Resource Allocation: Ensuring that workers, equipment, and materials are available and scheduled for tasks.</li>
+        <li>Optimizing Workflows: Minimizing delays and resource waste by organizing jobs in a logical sequence.</li>
+    </ul>
+    <p>Time Complexity: O(log n)</p>
+    <p>Space Complexity: O(n)</p>
+</div>
 
-    <div class="section">
-        <h2>2. Efficient Cable Network Management</h2>
-        <p class="highlight"><b>Key Aspects:</b></p>
-        <ul class="key-aspects">
-            <li>Finds the shortest path between nodes, ensuring the most efficient cable routing and data transmission paths.</li>
-            <li class="highlight">Optimizing performance and redundancy, ensuring that the network is both fast and resilient to failure.</li>
-        </ul>
-        <p><b>Time Complexity:</b> O(V²)</p>
-        <p><b>Space Complexity:</b> O(V + E)</p>
-        <div class="code">
-            <p><b>Code:</b></p>
-            <pre>
-function manageNetwork(graph) {
-    // Code for finding shortest path using Dijkstra or other algorithms
-    let distance = Array(graph.length).fill(Infinity);
-    distance[0] = 0; // Starting point
-    for (let i = 0; i < graph.length; i++) {
-        for (let j = 0; j < graph[i].length; j++) {
-            if (distance[j] > distance[i] + graph[i][j]) {
-                distance[j] = distance[i] + graph[i][j];
-            }
-        }
-    }
-    console.log('Shortest paths:', distance);
-}
-            </pre>
-        </div>
-    </div>
+<div class="section">
+    <p class="highlight">2. Efficient Cable Network Management</p>
+    <p>Efficient cable network management is a critical problem in urban areas where a vast amount of data, telecommunications, and power lines need to be organized and optimized. The goal is to minimize costs, maximize performance, and ensure redundancy for reliability. To solve Efficient Cable Network Management using graphs, we treat the network as a graph where each building, switch, or node is a vertex and each cable or connection between nodes is an edge. The objective is to design and manage the network efficiently by minimizing the total cost, ensuring connectivity, and optimizing for performance and redundancy.</p>
+    <p class="highlight">Key aspects:</p>
+    <ul>
+        <li>Finds the shortest path between nodes, ensuring the most efficient cable routing and data transmission paths.</li>
+        <li>Optimizing performance and redundancy, ensuring that the network is both fast and resilient to failure.</li>
+    </ul>
+    <p>Time Complexity: O(V²)</p>
+    <p>Space Complexity: O(V + E)</p>
+</div>
 
-    <div class="section">
-        <h2>3. E-commerce & Online Marketplaces</h2>
-        <p class="highlight"><b>Key Aspects:</b></p>
-        <ul class="key-aspects">
-            <li>Organizes products based on different attributes such as price, ratings, or names.</li>
-            <li class="highlight">Helps users quickly navigate through sorted lists, improving discoverability.</li>
-            <li>Increases user engagement by offering personalized product recommendations.</li>
-            <li>Improves conversion rates and sales by displaying products relevant to individual users.</li>
-        </ul>
-        <p><b>Time Complexity:</b> O(log n)</p>
-        <p><b>Space Complexity:</b> O(log n)</p>
-        <div class="code">
-            <p><b>Code:</b></p>
-            <pre>
-function binarySearch(arr, target) {
-    let left = 0, right = arr.length - 1;
-    while (left <= right) {
-        let mid = Math.floor((left + right) / 2);
-        if (arr[mid] === target) return mid;
-        if (arr[mid] < target) left = mid + 1;
-        else right = mid - 1;
-    }
-    return -1;
-}
-            </pre>
-        </div>
-    </div>
+<div class="section">
+    <p class="highlight">3. E-commerce & Online Marketplaces</p>
+    <p>To successfully implement an e-commerce marketplace, we can use a wide variety of algorithms. For example, binary search can be used to quickly search for products, merge sort can help sort the products, and recommendation engines can suggest different products to the user.</p>
+    <p class="highlight">Binary Search algorithm:</p>
+    <p>Binary Search is a highly efficient algorithm used to find a value within a sorted array or list. It works by repeatedly dividing the search interval in half, which allows it to search through large datasets much faster than linear search.</p>
+    <p class="highlight">Key aspects:</p>
+    <ul>
+        <li>Organizes products based on different attributes such as price, ratings, or names.</li>
+        <li>Helps users quickly navigate through sorted lists, improving discoverability.</li>
+        <li>Increases user engagement by offering personalized product recommendations.</li>
+        <li>Improves conversion rates and sales by displaying products relevant to individual users.</li>
+    </ul>
+    <p>Time Complexity: O(log n)</p>
+    <p>Space Complexity: O(log n)</p>
+</div>
 
-    <div class="section">
-        <h2>4. Education & Vocational Training Centers</h2>
-        <p class="highlight"><b>Key Aspects:</b></p>
-        <ul class="key-aspects">
-            <li>Finds the shortest paths between all pairs of locations (towns and centers).</li>
-            <li>Helps in determining the best placement of centers for maximum accessibility.</li>
-            <li class="highlight">Ensures minimal travel time for individuals to reach their nearest center.</li>
-        </ul>
-        <p><b>Time Complexity:</b> O(V³)</p>
-        <p><b>Space Complexity:</b> O(V²)</p>
-        <div class="code">
-            <p><b>Code:</b></p>
-            <pre>
-function floydWarshall(graph) {
-    let dist = [];
-    let V = graph.length;
-    for (let i = 0; i < V; i++) {
-        dist[i] = [];
-        for (let j = 0; j < V; j++) {
-            dist[i][j] = graph[i][j];
-        }
-    }
-    for (let k = 0; k < V; k++) {
-        for (let i = 0; i < V; i++) {
-            for (let j = 0; j < V; j++) {
-                if (dist[i][j] > dist[i][k] + dist[k][j]) {
-                    dist[i][j] = dist[i][k] + dist[k][j];
-                }
-            }
-        }
-    }
-    console.log('Shortest paths:', dist);
-}
-            </pre>
-        </div>
-    </div>
+<div class="section">
+    <p class="highlight">4. Education & Vocational Training Centers</p>
+    <p>To efficiently place Education and Vocational Training Centers so everyone can access them easily, we can use graph traversal algorithms. Let us consider that the localities or towns are the nodes and roads connections with weights as the distance between the travel time. Floyd's algorithm helps us find the shortest paths between all towns, helpful for analyzing overall connectivity. So this can be solved using Floyd's algorithm:</p>
+    <p>If we already know where to place the centers, we can use Floyd-Warshall's algorithm to find the shortest paths between all pairs of locations, including the centers and the people's homes. By applying Floyd-Warshall's algorithm, we can determine the shortest paths for people to reach their nearest centers.</p>
+    <p class="highlight">Key aspects:</p>
+    <ul>
+        <li>Finds the shortest paths between all pairs of locations (towns and centers).</li>
+        <li>Helps in determining the best placement of centers for maximum accessibility.</li>
+        <li>Ensures minimal travel time for individuals to reach their nearest center.</li>
+    </ul>
+    <p>Time Complexity: O(V³)</p>
+    <p>Space Complexity: O(V²)</p>
+</div>
 
-    <div class="section">
-        <h2>5. Microfinance or Lending Services</h2>
-        <p class="highlight"><b>Key Aspects:</b></p>
-        <ul class="key-aspects">
-            <li class="highlight">Quick Sort divides the array into two sub-arrays around a pivot element and recursively sorts them.</li>
-            <li>Quick Sort sorts the array without needing extra memory, as it swaps elements within the array, making it space efficient.</li>
-            <li>The algorithm performs well on large datasets, making it ideal for sorting applicants based on their credit score, loan amount, or urgency.</li>
-        </ul>
-        <p><b>Time Complexity:</b> O(n log n)</p>
-        <p><b>Space Complexity:</b> O(log n)</p>
-        <div class="code">
-            <p><b>Code:</b></p>
-            <pre>
-function quickSort(arr) {
-    if (arr.length <= 1) return arr;
-    let pivot = arr[arr.length - 1];
-    let left = [];
-    let right = [];
-    for (let i = 0; i < arr.length - 1; i++) {
-        if (arr[i] < pivot) left.push(arr[i]);
-        else right.push(arr[i]);
-    }
-    return [...quickSort(left), pivot, ...quickSort(right)];
-}
-            </pre>
-        </div>
-    </div>
+<div class="section">
+    <p class="highlight">5. Microfinance or Lending Services</p>
+    <p>A sorting algorithm can be used for this case. Sorting algorithms can be used to arrange the applicants based on their credit score or the size of the loan or the urgency of the loan. Overall, sorting is an essential tool for balancing risk, maximizing impact, and improving efficiency in microfinancing. We can use sorting algorithms like Quick sort and merge sort for this purpose as they are good at handling large data efficiently.</p>
+    <p class="highlight">Quick Sort:</p>
+    <p>Quick Sort is an efficient comparison-based sorting algorithm that uses a divide-and-conquer strategy to sort an array or list. Quick sort is useful in this scenario because of the nature of data and the large amounts of data, as quick sort is efficient in sorting large amounts of data and has an efficiency of O(1.38n log n) in the average case.</p>
+    <p class="highlight">Key aspects:</p>
+    <ul>
+        <li>Quick Sort divides the array into two sub-arrays around a pivot element and recursively sorts them.</li>
+        <li>Quick Sort sorts the array without needing extra memory, as it swaps elements within the array, making it space-efficient.</li>
+        <li>The algorithm performs well on large datasets, making it ideal for sorting applicants based on their credit score, loan amount, or urgency.</li>
+    </ul>
+    <p>Time Complexity: O(n log n)</p>
+    <p>Space Complexity: O(log n)</p>
+</div>
 
 </body>
 </html>

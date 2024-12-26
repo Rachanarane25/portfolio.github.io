@@ -1,4 +1,30 @@
-#include <iostream>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C++ Binary Search Tree Code</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        pre {
+            background-color: #f4f4f4;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        code {
+            font-family: Consolas, "Courier New", monospace;
+        }
+    </style>
+</head>
+<body>
+    <h1>C++ Binary Search Tree Code</h1>
+    <pre><code>
+#include &lt;iostream&gt;
 using namespace std;
 
 // Node structure
@@ -28,9 +54,9 @@ public:
             return new Node(value);
         }
 
-        if (value < node->data) {
+        if (value &lt; node->data) {
             node->left = insert(node->left, value);
-        } else if (value > node->data) {
+        } else if (value &gt; node->data) {
             node->right = insert(node->right, value);
         }
         return node;
@@ -48,7 +74,7 @@ public:
 
         if (node->data == value) {
             return true;
-        } else if (value < node->data) {
+        } else if (value &lt; node->data) {
             return search(node->left, value);
         } else {
             return search(node->right, value);
@@ -64,27 +90,27 @@ public:
         if (node == nullptr) return;
 
         inorder(node->left);
-        cout << node->data << " ";
+        cout &lt;&lt; node->data &lt;&lt; " ";
         inorder(node->right);
     }
 
     void inorder() {
         inorder(root);
-        cout << endl;
+        cout &lt;&lt; endl;
     }
 
     // Pre-order traversal (Root, Left, Right)
     void preorder(Node* node) {
         if (node == nullptr) return;
 
-        cout << node->data << " ";
+        cout &lt;&lt; node->data &lt;&lt; " ";
         preorder(node->left);
         preorder(node->right);
     }
 
     void preorder() {
         preorder(root);
-        cout << endl;
+        cout &lt;&lt; endl;
     }
 
     // Post-order traversal (Left, Right, Root)
@@ -93,12 +119,12 @@ public:
 
         postorder(node->left);
         postorder(node->right);
-        cout << node->data << " ";
+        cout &lt;&lt; node->data &lt;&lt; " ";
     }
 
     void postorder() {
         postorder(root);
-        cout << endl;
+        cout &lt;&lt; endl;
     }
 };
 
@@ -116,22 +142,25 @@ int main() {
     tree.insert(80);
 
     // Display tree traversals
-    cout << "In-order Traversal: ";
+    cout &lt;&lt; "In-order Traversal: ";
     tree.inorder();
 
-    cout << "Pre-order Traversal: ";
+    cout &lt;&lt; "Pre-order Traversal: ";
     tree.preorder();
 
-    cout << "Post-order Traversal: ";
+    cout &lt;&lt; "Post-order Traversal: ";
     tree.postorder();
 
     // Search for a value
     int key = 40;
     if (tree.search(key)) {
-        cout << key << " found in the BST." << endl;
+        cout &lt;&lt; key &lt;&lt; " found in the BST." &lt;&lt; endl;
     } else {
-        cout << key << " not found in the BST." << endl;
+        cout &lt;&lt; key &lt;&lt; " not found in the BST." &lt;&lt; endl;
     }
 
     return 0;
 }
+    </code></pre>
+</body>
+</html>

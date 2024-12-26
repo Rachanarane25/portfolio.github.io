@@ -1,44 +1,67 @@
-#include <iostream>
-#include <vector>
-#include <queue>
-#include <climits>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C++ Dijkstra Algorithm Code</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        pre {
+            background-color: #f4f4f4;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        code {
+            font-family: Consolas, "Courier New", monospace;
+        }
+    </style>
+</head>
+<body>
+    <h1>C++ Dijkstra Algorithm Code</h1>
+    <pre><code>
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;queue&gt;
+#include &lt;climits&gt;
 using namespace std;
 
-// Define a structure for edges
 struct Edge {
     int to, weight;
 };
 
-// Custom comparator for priority queue
 struct Compare {
-    bool operator()(pair<int, int> a, pair<int, int> b) {
-        return a.second > b.second; // Min-heap based on distance
+    bool operator()(pair&lt;int, int&gt; a, pair&lt;int, int&gt; b) {
+        return a.second &gt; b.second;
     }
 };
 
-void Dijkstra(vector<vector<Edge>>& graph, int source) {
+void Dijkstra(vector&lt;vector&lt;Edge&gt;&gt;& graph, int source) {
     int V = graph.size();
-    vector<int> dist(V, INT_MAX);       // Distance from source to each vertex
-    vector<int> prev(V, -1);           // To store the penultimate vertex
-    vector<bool> visited(V, false);    // Track visited vertices
+    vector&lt;int&gt; dist(V, INT_MAX);       
+    vector&lt;int&gt; prev(V, -1);           
+    vector&lt;bool&gt; visited(V, false);    
 
-    priority_queue<pair<int, int>, vector<pair<int, int>>, Compare> pq;
+    priority_queue&lt;pair&lt;int, int&gt;, vector&lt;pair&lt;int, int&gt;&gt;, Compare&gt; pq;
     dist[source] = 0;
-    pq.push({source, 0}); // {vertex, distance}
+    pq.push({source, 0}); 
 
     while (!pq.empty()) {
-        int u = pq.top().first; // Get the vertex with the smallest distance
+        int u = pq.top().first; 
         pq.pop();
 
-        if (visited[u]) continue; // Skip if already processed
+        if (visited[u]) continue;
         visited[u] = true;
 
-        // Relaxation of adjacent vertices
         for (const Edge& edge : graph[u]) {
             int v = edge.to;
             int weight = edge.weight;
 
-            if (!visited[v] && dist[u] + weight < dist[v]) {
+            if (!visited[v] && dist[u] + weight &lt; dist[v]) {
                 dist[v] = dist[u] + weight;
                 prev[v] = u;
                 pq.push({v, dist[v]});
@@ -46,18 +69,16 @@ void Dijkstra(vector<vector<Edge>>& graph, int source) {
         }
     }
 
-    // Print shortest distances and paths
-    cout << "Vertex\tDistance from Source\tPenultimate Vertex\n";
-    for (int i = 0; i < V; ++i) {
-        cout << i << "\t" << dist[i] << "\t\t\t" << prev[i] << "\n";
+    cout &lt;&lt; "Vertex\tDistance from Source\tPenultimate Vertex\n";
+    for (int i = 0; i &lt; V; ++i) {
+        cout &lt;&lt; i &lt;&lt; "\t" &lt;&lt; dist[i] &lt;&lt; "\t\t\t" &lt;&lt; prev[i] &lt;&lt; "\n";
     }
 }
 
 int main() {
-    int V = 5; // Number of vertices
-    vector<vector<Edge>> graph(V);
+    int V = 5;
+    vector&lt;vector&lt;Edge&gt;&gt;& graph(V);
 
-    // Example graph
     graph[0] = {{1, 10}, {3, 30}, {4, 100}};
     graph[1] = {{2, 50}};
     graph[2] = {{4, 10}};
@@ -69,3 +90,6 @@ int main() {
 
     return 0;
 }
+    </code></pre>
+</body>
+</html>

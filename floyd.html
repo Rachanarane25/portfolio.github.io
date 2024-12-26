@@ -1,61 +1,80 @@
-#include <iostream>
-#include <vector>
-#include <climits>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C++ Floyd-Warshall Algorithm Code</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        pre {
+            background-color: #f4f4f4;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        code {
+            font-family: Consolas, "Courier New", monospace;
+        }
+    </style>
+</head>
+<body>
+    <h1>C++ Floyd-Warshall Algorithm Code</h1>
+    <pre><code>
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;climits&gt;
 using namespace std;
 
-// Floyd's Algorithm for All-Pairs Shortest Path
-void FloydWarshall(vector<vector<int>>& W) {
+void FloydWarshall(vector&lt;vector&lt;int&gt;&gt;& W) {
     int n = W.size();
 
-    // Initialize the distance matrix D as the weight matrix W
-    vector<vector<int>> D = W;
+    vector&lt;vector&lt;int&gt;&gt;& D = W;
 
-    // Apply Floyd-Warshall algorithm
-    for (int k = 0; k < n; ++k) {
-        for (int i = 0; i < n; ++i) {
-            for (int j = 0; j < n; ++j) {
-                // Update the distance matrix with the shortest path
-                if (D[i][k] != INT_MAX && D[k][j] != INT_MAX) {
+    for (int k = 0; k &lt; n; ++k) {
+        for (int i = 0; i &lt; n; ++i) {
+            for (int j = 0; j &lt; n; ++j) {
+                if (D[i][k] != INT_MAX &amp;&amp; D[k][j] != INT_MAX) {
                     D[i][j] = min(D[i][j], D[i][k] + D[k][j]);
                 }
             }
         }
     }
 
-    // Print the resulting distance matrix
-    cout << "Shortest Path Matrix:" << endl;
-    for (int i = 0; i < n; ++i) {
-        for (int j = 0; j < n; ++j) {
+    cout &lt;&lt; "Shortest Path Matrix:" &lt;&lt; endl;
+    for (int i = 0; i &lt; n; ++i) {
+        for (int j = 0; j &lt; n; ++j) {
             if (D[i][j] == INT_MAX) {
-                cout << "INF ";
+                cout &lt;&lt; "INF " ;
             } else {
-                cout << D[i][j] << " ";
+                cout &lt;&lt; D[i][j] &lt;&lt; " " ;
             }
         }
-        cout << endl;
+        cout &lt;&lt; endl;
     }
 }
 
 int main() {
-    // Example input: 4 nodes, weights in the adjacency matrix
     int n = 4;
-    vector<vector<int>> W(n, vector<int>(n, INT_MAX));
+    vector&lt;vector&lt;int&gt;&gt;& W(n, vector&lt;int&gt;(n, INT_MAX));
 
-    // Initializing weight matrix W with some example values
-    // W[i][j] represents the weight of edge from node i to node j
-    for (int i = 0; i < n; ++i) {
-        W[i][i] = 0; // Distance from a node to itself is 0
+    for (int i = 0; i &lt; n; ++i) {
+        W[i][i] = 0;
     }
 
-    // Example edges (node1, node2, weight)
     W[0][1] = 5;
     W[0][2] = 10;
     W[1][2] = 3;
     W[2][3] = 1;
     W[3][0] = 7;
     
-    // Call Floyd's algorithm
     FloydWarshall(W);
 
     return 0;
 }
+    </code></pre>
+</body>
+</html>

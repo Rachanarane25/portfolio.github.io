@@ -1,0 +1,137 @@
+#include <iostream>
+using namespace std;
+
+// Node structure
+struct Node {
+    int data;
+    Node* left;
+    Node* right;
+
+    Node(int value) {
+        data = value;
+        left = right = nullptr;
+    }
+};
+
+// Class for Binary Search Tree
+class BST {
+public:
+    Node* root;
+
+    BST() {
+        root = nullptr;
+    }
+
+    // Insert a node into the BST
+    Node* insert(Node* node, int value) {
+        if (node == nullptr) {
+            return new Node(value);
+        }
+
+        if (value < node->data) {
+            node->left = insert(node->left, value);
+        } else if (value > node->data) {
+            node->right = insert(node->right, value);
+        }
+        return node;
+    }
+
+    void insert(int value) {
+        root = insert(root, value);
+    }
+
+    // Search for a value in the BST
+    bool search(Node* node, int value) {
+        if (node == nullptr) {
+            return false;
+        }
+
+        if (node->data == value) {
+            return true;
+        } else if (value < node->data) {
+            return search(node->left, value);
+        } else {
+            return search(node->right, value);
+        }
+    }
+
+    bool search(int value) {
+        return search(root, value);
+    }
+
+    // In-order traversal (Left, Root, Right)
+    void inorder(Node* node) {
+        if (node == nullptr) return;
+
+        inorder(node->left);
+        cout << node->data << " ";
+        inorder(node->right);
+    }
+
+    void inorder() {
+        inorder(root);
+        cout << endl;
+    }
+
+    // Pre-order traversal (Root, Left, Right)
+    void preorder(Node* node) {
+        if (node == nullptr) return;
+
+        cout << node->data << " ";
+        preorder(node->left);
+        preorder(node->right);
+    }
+
+    void preorder() {
+        preorder(root);
+        cout << endl;
+    }
+
+    // Post-order traversal (Left, Right, Root)
+    void postorder(Node* node) {
+        if (node == nullptr) return;
+
+        postorder(node->left);
+        postorder(node->right);
+        cout << node->data << " ";
+    }
+
+    void postorder() {
+        postorder(root);
+        cout << endl;
+    }
+};
+
+// Main function
+int main() {
+    BST tree;
+
+    // Insert nodes into the BST
+    tree.insert(50);
+    tree.insert(30);
+    tree.insert(20);
+    tree.insert(40);
+    tree.insert(70);
+    tree.insert(60);
+    tree.insert(80);
+
+    // Display tree traversals
+    cout << "In-order Traversal: ";
+    tree.inorder();
+
+    cout << "Pre-order Traversal: ";
+    tree.preorder();
+
+    cout << "Post-order Traversal: ";
+    tree.postorder();
+
+    // Search for a value
+    int key = 40;
+    if (tree.search(key)) {
+        cout << key << " found in the BST." << endl;
+    } else {
+        cout << key << " not found in the BST." << endl;
+    }
+
+    return 0;
+}

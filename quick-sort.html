@@ -1,0 +1,63 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+// Function to perform the partitioning step
+int Partition(vector<int>& A, int l, int r) {
+    int p = A[l];   // Pivot is the first element in the subarray
+    int i = l;
+    int j = r + 1;
+
+    while (true) {
+        // Move i to the right as long as A[i] is less than or equal to pivot
+        do {
+            i++;
+        } while (A[i] < p && i <= r);
+
+        // Move j to the left as long as A[j] is greater than or equal to pivot
+        do {
+            j--;
+        } while (A[j] > p && j >= l);
+
+        // If i and j have not crossed, swap A[i] and A[j]
+        if (i < j) {
+            swap(A[i], A[j]);
+        } else {
+            break;
+        }
+    }
+
+    // Swap the pivot element with A[j], so that pivot is in its correct sorted position
+    swap(A[l], A[j]);
+    return j;  // Return the pivot's final position
+}
+
+// QuickSort function
+void QuickSort(vector<int>& A, int l, int r) {
+    if (l < r) {
+        int s = Partition(A, l, r);  // Partition the array
+        QuickSort(A, l, s - 1);       // Recursively sort the left subarray
+        QuickSort(A, s + 1, r);       // Recursively sort the right subarray
+    }
+}
+
+int main() {
+    vector<int> A = {10, 7, 8, 9, 1, 5}; // Example array
+    int n = A.size();
+
+    cout << "Original array: ";
+    for (int i = 0; i < n; ++i) {
+        cout << A[i] << " ";
+    }
+    cout << endl;
+
+    QuickSort(A, 0, n - 1);  // Sort the array using QuickSort
+
+    cout << "Sorted array: ";
+    for (int i = 0; i < n; ++i) {
+        cout << A[i] << " ";
+    }
+    cout << endl;
+
+    return 0;
+}

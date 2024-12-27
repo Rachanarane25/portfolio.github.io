@@ -70,9 +70,8 @@
         <div class="sub-heading">Problem Statement: Smart Disaster Response and Evacuation System</div>
 
         <div class="content">
-            <strong>Problem Discription:</strong><br>
+            <strong>Problem Description:</strong><br>
             Design a Smart Disaster Response and Evacuation System to efficiently manage rescue operations, prioritize high-risk areas, optimize evacuation routes, and allocate resources during emergencies like floods, earthquakes, or fires. The system should ensure real-time decision-making, minimize casualties, and optimize resource allocation.
-
         </div>
 
         <div class="sub-heading">Key Aspects:</div>
@@ -81,6 +80,76 @@
             <li><span class="highlight">Efficient Allocation:</span> Resources should be distributed to the most urgent zones based on proximity and need.</li>
             <li><span class="highlight">Priority Adjustment:</span> As the disaster evolves, priority levels for resources may shift.</li>
         </ul>
+
+        <!-- Disaster Impact Mapping -->
+        <div class="sub-heading">1. Disaster Impact Mapping</div>
+        <div class="content">
+            Disaster Impact Mapping refers to the process of identifying and recording the areas affected by a disaster, such as floods, earthquakes, or fires. This mapping helps track the severity of the disaster in real-time and is essential for making informed decisions about rescue operations, resource allocation, and evacuation plans. The system ensures that all affected zones are recorded systematically, and updates are made dynamically as the disaster progresses.
+        </div>
+        <div class="sub-heading">Key Aspects:</div>
+        <ul class="key-aspects">
+            <li>Continuously update affected zones and severity levels.</li>
+            <li>Assign a numerical score to indicate disaster intensity.</li>
+            <li>Ensure quick retrieval of data for decision-makers.</li>
+            <li>Handle multiple zones or disasters without performance issues.</li>
+            <li>Enable fast storage and retrieval of disaster data.</li>
+        </ul>
+        <div class="sub-heading">Algorithm Applied: Hashing</div>
+        <div class="content">
+            During disasters, the situation changes dynamically. Hashing allows quick updates to disaster zones and severity levels in constant time O(1) on average, ensuring real-time accuracy. Rescue teams and decision-makers need instant access to the severity of specific zones. Disasters often impact multiple zones. Hashing handles a large number of zones and data entries without performance drops, unlike linear or tree-based methods.
+        </div>
+        <div class="sub-heading">Time Complexity:</div>
+        <ul class="key-aspects">
+            <li>Insertion/Update (Add or Modify Zone): O(1)</li>
+            <li>Worst Case: O(n)</li>
+        </ul>
+
+        <!-- Optimal Evacuation Routing -->
+        <div class="sub-heading">2. Optimal Evacuation Routing</div>
+        <div class="content">
+            Dijkstra’s Algorithm is used to find the shortest path between nodes in a graph, which can represent road networks in the case of evacuation routes. In the context of disaster response, it can be used to determine the fastest or safest evacuation routes from various disaster zones to shelters, considering factors like distance, road conditions, and hazard levels.
+        </div>
+        <div class="sub-heading">Key Aspects:</div>
+        <ul class="key-aspects">
+            <li>Finds the least costly path (in terms of time or distance) from the current location to the destination.</li>
+            <li>Models roads and routes as a weighted graph where nodes represent locations (zones, shelters) and edges represent the paths with weights based on distance or danger.</li>
+            <li>Provides a reliable, optimal solution for pathfinding, even with numerous potential evacuation routes.</li>
+        </ul>
+        <div class="sub-heading">Algorithm Applied: Dijkstra’s Algorithm</div>
+        <div class="content">
+            Dijkstra’s ensures that evacuees are directed along the fastest and safest routes to shelters, minimizing time and risk during evacuation. In a disaster scenario, routes can change due to road blockages, hazards, or infrastructure failures. Dijkstra’s can dynamically adjust by recalculating the shortest path based on real-time data. In the case of multiple evacuees or areas requiring attention, Dijkstra’s helps prioritize evacuation routes for the most vulnerable populations (e.g., those in high-risk zones).
+        </div>
+        <div class="sub-heading">Time Complexity:</div>
+        <ul class="key-aspects">
+            <li>Time Complexity: O(E log V), where E is the number of edges (roads) and V is the number of vertices (zones, shelters).</li>
+        </ul>
+
+        <!-- Resource Distribution Cost Minimization -->
+        <div class="sub-heading">3. Resource Distribution Cost Minimization</div>
+        <div class="content">
+            Kruskal's Algorithm is used to find the minimum spanning tree (MST) in a weighted graph. In the context of disaster response, it helps design an efficient resource distribution network by minimizing the cost of distributing resources such as medical supplies, food, and rescue equipment to various disaster-hit zones. By ensuring the most cost-effective connections between distribution centers and affected areas, Kruskal's ensures that resources are allocated efficiently.
+        </div>
+        <div class="sub-heading">Key Aspects:</div>
+        <ul class="key-aspects">
+            <li>Minimizes the cost of connecting disaster zones to resource points, ensuring that resources are distributed in the most efficient way.</li>
+            <li>Focuses on selecting paths that reduce the overall cost of transportation for resources.</li>
+            <li>Models the disaster zones and resource points as nodes in a graph, with edges representing possible resource distribution paths, weighted by cost or distance.</li>
+            <li>Selects edges that connect unconnected components with the least cost, ensuring an efficient distribution of resources.</li>
+        </ul>
+        <div class="sub-heading">Algorithm Applied: Kruskal's Algorithm</div>
+        <div class="content">
+            In disaster scenarios, resources like medical supplies, food, and rescue teams need to be delivered to affected areas as efficiently as possible. Kruskal’s algorithm helps minimize the cost of distributing these resources by selecting the least expensive paths in a connected network.
+        </div>
+        <div class="sub-heading">Time Complexity:</div>
+        <ul class="key-aspects">
+            <li>Time Complexity: O(E log E), where E is the number of edges in the graph.</li>
+        </ul>
+
+        <!-- Conclusion -->
+        <div class="sub-heading">Conclusion</div>
+        <div class="content">
+            By applying Hashing, Dijkstra's Algorithm, and Kruskal's Algorithm, we can build a disaster response system that efficiently maps affected zones, optimizes evacuation routes, and minimizes resource distribution costs. Hashing ensures quick updates and retrieval of disaster impact data, Dijkstra’s guarantees the safest and fastest evacuation paths, and Kruskal’s minimizes the cost of connecting resource distribution points. Together, these algorithms enable a streamlined and effective disaster management system that enhances real-time decision-making and resource optimization.
+        </div>
     </div>
 </body>
 </html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C++ Kruskal's Algorithm</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        pre {
+            background-color: #f4f4f4;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        code {
+            font-family: Consolas, "Courier New", monospace;
+        }
+    </style>
+</head>
+<body>
+    <h1>C++ Kruskal's Algorithm Code</h1>
+    <pre><code>
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+
+struct Edge {
+    int u, v, weight;
+};
+
+class DisjointSet {
+public:
+    vector&lt;int&gt; parent, rank;
+
+    DisjointSet(int n) {
+        parent.resize(n);
+        rank.resize(n, 0);
+        for (int i = 0; i &lt; n; ++i)
+            parent[i] = i;
+    }
+
+    int find(int u) {
+        if (parent[u] != u)
+            parent[u] = find(parent[u]);  // Path compression
+        return parent[u];
+    }
+
+    void unionSet(int u, int v) {
+        int rootU = find(u);
+        int rootV = find(v);
+
+        if (rootU != rootV) {
+            // Union by rank
+            if (rank[rootU] &gt; rank[rootV])
+                parent[rootV] = rootU;
+            else if (rank[rootU] &lt; rank[rootV])
+                parent[rootU] = rootV;
+            else {
+                parent[rootV] = rootU;
+                rank[rootU]++;
+            }
+        }
+    }
+};
+
+vector&lt;Edge&gt; kruskal(int V, vector&lt;Edge&gt;&amp; edges) {
+    sort(edges.begin(), edges.end(), [](Edge&amp; e1, Edge&amp; e2) {
+        return e1.weight &lt; e2.weight;
+    });
+
+    DisjointSet ds(V);
+    vector&lt;Edge&gt; mst;
+
+    for (const auto&amp; edge : edges) {
+        int u = edge.u, v = edge.v;
+
+        if (ds.find(u) != ds.find(v)) {
+            mst.push_back(edge);
+            ds.unionSet(u, v);
+        }
+    }
+
+    return mst;
+}
+
+int main() {
+    int V = 4;
+    vector&lt;Edge&gt; edges = {
+        {0, 1, 10}, {0, 2, 6}, {0, 3, 5}, {1, 3, 15}, {2, 3, 4}
+    };
+
+    vector&lt;Edge&gt; mst = kruskal(V, edges);
+
+    cout &lt;&lt; "Edges in the Minimum Spanning Tree (MST):\n";
+    for (const auto&amp; edge : mst) {
+        cout &lt;&lt; edge.u &lt;&lt; " - " &lt;&lt; edge.v &lt;&lt; " : " &lt;&lt; edge.weight &lt;&lt; endl;
+    }
+
+    return 0;
+}
+    </code></pre>
+</body>
+</html>

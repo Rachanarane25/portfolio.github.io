@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disaster Impact Mapping - C++ Code</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f9;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 20px;
+            background: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+
+        .heading {
+            font-size: 48px;
+            font-weight: 900;
+            font-family: 'Georgia', serif;
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        pre {
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="heading">Disaster Impact Mapping - C++ Code</div>
+        <pre>
+#include &lt;iostream&gt;
+#include &lt;unordered_map&gt;
+#include &lt;string&gt;
+using namespace std;
+
+class DisasterImpactMapping {
+private:
+    unordered_map&lt;string, string&gt; zones;
+
+public:
+    void addOrUpdateZone(const string& zone_id, const string& severity_level) {
+        zones[zone_id] = severity_level;
+        cout &lt;&lt; "Zone " &lt;&lt; zone_id &lt;&lt; " updated with severity level: " &lt;&lt; severity_level &lt;&lt; endl;
+    }
+
+    string getZoneSeverity(const string& zone_id) {
+        if (zones.find(zone_id) != zones.end()) {
+            return zones[zone_id];
+        } else {
+            cout &lt;&lt; "Zone " &lt;&lt; zone_id &lt;&lt; " not found." &lt;&lt; endl;
+            return "";
+        }
+    }
+
+    void removeZone(const string& zone_id) {
+        if (zones.find(zone_id) != zones.end()) {
+            zones.erase(zone_id);
+            cout &lt;&lt; "Zone " &lt;&lt; zone_id &lt;&lt; " has been removed." &lt;&lt; endl;
+        } else {
+            cout &lt;&lt; "Zone " &lt;&lt; zone_id &lt;&lt; " not found." &lt;&lt; endl;
+        }
+    }
+
+    void displayAllZones() {
+        if (!zones.empty()) {
+            cout &lt;&lt; "\nDisaster Zones and Severity Levels:" &lt;&lt; endl;
+            for (const auto& pair : zones) {
+                cout &lt;&lt; "Zone " &lt;&lt; pair.first &lt;&lt; ": Severity Level " &lt;&lt; pair.second &lt;&lt; endl;
+            }
+        } else {
+            cout &lt;&lt; "No zones available." &lt;&lt; endl;
+        }
+    }
+};
+
+int main() {
+    DisasterImpactMapping disasterMapping;
+
+    disasterMapping.addOrUpdateZone("ZoneA", "High");
+    disasterMapping.addOrUpdateZone("ZoneB", "Medium");
+    disasterMapping.addOrUpdateZone("ZoneC", "Low");
+
+    cout &lt;&lt; "Severity of ZoneA: " &lt;&lt; disasterMapping.getZoneSeverity("ZoneA") &lt;&lt; endl;
+
+    disasterMapping.removeZone("ZoneB");
+
+    disasterMapping.displayAllZones();
+
+    return 0;
+}
+        </pre>
+    </div>
+</body>
+</html>

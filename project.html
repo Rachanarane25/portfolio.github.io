@@ -82,26 +82,24 @@
         </ul>
 
         <!-- Disaster Impact Mapping -->
-        <div class="sub-heading">1. Disaster Impact Mapping</div>
+        <div class="sub-heading">1.High-Risk Zone Prioritization</div>
         <div class="content">
-            Disaster Impact Mapping refers to the process of identifying and recording the areas affected by a disaster, such as floods, earthquakes, or fires. This mapping helps track the severity of the disaster in real-time and is essential for making informed decisions about rescue operations, resource allocation, and evacuation plans. The system ensures that all affected zones are recorded systematically, and updates are made dynamically as the disaster progresses.
-        </div>
+        High-Risk Zone Prioritization is a method to sort and rank areas based on their risk severity levels (e.g., High, Medium, Low) to focus resources and actions on the most critical zones first. By assigning numerical values to severity levels, a max-heap is built, and heap sort is used to ensure the zones are prioritized, with high-risk zones at the top of the list.        </div>
         <div class="sub-heading">Key Aspects:</div>
         <ul class="key-aspects">
-            <li>Continuously update affected zones and severity levels.</li>
-            <li>Assign a numerical score to indicate disaster intensity.</li>
-            <li>Ensure quick retrieval of data for decision-makers.</li>
-            <li>Handle multiple zones or disasters without performance issues.</li>
-            <li>Enable fast storage and retrieval of disaster data.</li>
+            <li> Convert severity levels (High, Medium, Low) into numerical values for comparison.</li>
+            <li> Build a max-heap to organize zones with the highest severity at the root.</li>
+            <li>Extract the root iteratively while maintaining the heap property to sort zones.</li>
+            <li>Extract the root iteratively while maintaining the heap property to sort zones.</li>
+        
         </ul>
-        <div class="sub-heading">Algorithm Applied: Hashing</div>
+        <div class="sub-heading">Algorithm Applied: Heap sort</div>
         <div class="content">
-            During disasters, the situation changes dynamically. Hashing allows quick updates to disaster zones and severity levels in constant time O(1) on average, ensuring real-time accuracy. Rescue teams and decision-makers need instant access to the severity of specific zones. Disasters often impact multiple zones. Hashing handles a large number of zones and data entries without performance drops, unlike linear or tree-based methods.
-        </div>
+        High-Risk Zone Prioritization using Heap Sort involves organizing zones based on their severity levels (e.g., High, Medium, Low) to ensure that the highest-priority zones appear first. Severity levels are assigned numerical values (e.g., High = 3, Medium = 2, Low = 1) for comparison. The process starts by building a max-heap, which ensures the highest severity is at the root. Then, elements are extracted from the heap one by one, each time reheapifying the remaining data to maintain the heap property. This sorting method produces a list of zones ordered by their severity, with high-risk zones prioritized at the top.        </div>
         <div class="sub-heading">Time Complexity:</div>
         <ul class="key-aspects">
-            <li>Insertion/Update (Add or Modify Zone): O(1)</li>
-            <li>Worst Case: O(n)</li>
+            <li>max-heap: O(n)</li>
+            <li>Heap sort (n heapify operations): O(n log n)</li>
         </ul>
         <div class="content">
             <a href="hashing.html">code for  Hashing Algorithm</a>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disaster Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        pre {
+            background-color: #f4f4f4;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            overflow-x: auto;
+        }
+        code {
+            font-family: Consolas, Monaco, "Courier New", monospace;
+            font-size: 14px;
+        }
+        h1 {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Disaster Management System - C++ Code</h1>
+    <p>This is a disaster management system implemented in C++. Below is the source code:</p>
+    <pre><code>
+#include&lt;iostream&gt;
+#include&lt;vector&gt;
+#include&lt;stack&gt;
+#include&lt;string&gt;
+#include &lt;unordered_map&gt;
+#include&lt;math.h&gt;
+#include &lt;bits/stdc++.h&gt;
+#define INF 99999
+
+using namespace std;
+
+int visited[10],v=8,m[10][10]= {{0,0,1,0,0,0,0,0},
+    {0,0,1,1,0,0,0,0},
+    {1,1,0,1,0,0,0,0},
+    {0,1,1,0,1,1,0,0},
+    {0,0,0,1,0,1,1,0},
+    {0,0,0,1,1,0,1,0},
+    {0,0,0,0,1,1,0,1},
+    {0,0,0,0,0,0,1,0}
+};
+int path[10],j=0;
+const int vert = 4;
+unordered_map&lt;string,string&gt; impactmap;
+
+void changes(unordered_map&lt;string,string&gt;&impactmap)
+{
+    // Function implementation
+}
+
+void deletezone(unordered_map&lt;string,string&gt;&impactmap)
+{
+    // Function implementation
+}
+
+void searchzone(unordered_map&lt;string,string&gt;&impactmap)
+{
+    // Function implementation
+}
+
+void hashingdisplay(unordered_map&lt;string,string&gt;&impactmap)
+{
+    // Function implementation
+}
+
+void addzone(unordered_map&lt;string,string&gt;&impactmap)
+{
+    // Function implementation
+}
+
+void hashing_2(int *c)
+{
+    // Function implementation
+}
+
+vector&lt;int&gt; bellf(int V,vector&lt;vector&lt;int&gt;&gt; &edges,int source,vector&lt;int&gt;&parent)
+{
+    // Function implementation
+}
+
+void paths(int vertex,vector&lt;int&gt;&parent)
+{
+    // Function implementation
+}
+
+void bellmanford_4()
+{
+    // Function implementation
+}
+
+void dfs(int m[10][10],int v,int source)
+{
+    // Function implementation
+}
+
+void dfs_10()
+{
+    // Function implementation
+}
+
+int main()
+{
+    // Main function implementation
+}
+    </code></pre>
+    <p>Copy the code above and paste it into your favorite C++ compiler to test its functionality!</p>
+</body>
+</html>

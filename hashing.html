@@ -3,112 +3,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Disaster Impact Mapping - C++ Code</title>
+    <title>High-Risk Zone Prioritization</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            background: #f4f4f9;
+            margin: 20px;
+            background-color: #f9f9f9;
             color: #333;
         }
-
-        .container {
-            max-width: 900px;
-            margin: 30px auto;
-            padding: 20px;
-            background: #ffffff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            border-radius: 10px;
-        }
-
-        .heading {
-            font-size: 48px;
-            font-weight: 900;
-            font-family: 'Georgia', serif;
-            color: #2c3e50;
-            text-align: center;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
         pre {
-            background-color: #f5f5f5;
+            background: #333;
+            color: #f8f8f2;
             padding: 15px;
-            border-radius: 5px;
+            border-radius: 8px;
             overflow-x: auto;
-            font-size: 16px;
-            line-height: 1.5;
+        }
+        code {
+            font-family: "Courier New", Courier, monospace;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="heading">Disaster Impact Mapping - C++ Code</div>
-        <pre>
+    <h1>High-Risk Zone Prioritization</h1>
+    <p>This code demonstrates how to use Heap Sort to prioritize high-risk zones based on their severity levels.</p>
+
+    <h2>C++ Code</h2>
+    <pre><code>
 #include &lt;iostream&gt;
-#include &lt;unordered_map&gt;
+#include &lt;vector&gt;
 #include &lt;string&gt;
+#include &lt;algorithm&gt;
+
 using namespace std;
 
-class DisasterImpactMapping {
-private:
-    unordered_map&lt;string, string&gt; zones;
+// Function to heapify a subtree rooted at index i
+void heapify(vector&lt;pair&lt;int, int&gt;&gt; &zones, int n, int i) {
+    int largest = i; // Initialize largest as root
+    int left = 2 * i + 1;
+    int right = 2 * i + 2;
 
-public:
-    void addOrUpdateZone(const string& zone_id, const string& severity_level) {
-        zones[zone_id] = severity_level;
-        cout &lt;&lt; "Zone " &lt;&lt; zone_id &lt;&lt; " updated with severity level: " &lt;&lt; severity_level &lt;&lt; endl;
-    }
+    // Check if left child exists and is greater than root
+    if (left &lt; n && zones[left].second &gt; zones[largest].second)
+        largest = left;
 
-    string getZoneSeverity(const string& zone_id) {
-        if (zones.find(zone_id) != zones.end()) {
-            return zones[zone_id];
-        } else {
-            cout &lt;&lt; "Zone " &lt;&lt; zone_id &lt;&lt; " not found." &lt;&lt; endl;
-            return "";
-        }
-    }
+    // Check if right child exists and is greater than the largest so far
+    if (right &lt; n && zones[right].second &gt; zones[largest].second)
+        largest = right;
 
-    void removeZone(const string& zone_id) {
-        if (zones.find(zone_id) != zones.end()) {
-            zones.erase(zone_id);
-            cout &lt;&lt; "Zone " &lt;&lt; zone_id &lt;&lt; " has been removed." &lt;&lt; endl;
-        } else {
-            cout &lt;&lt; "Zone " &lt;&lt; zone_id &lt;&lt; " not found." &lt;&lt; endl;
-        }
+    // If largest is not root
+    if (largest != i) {
+        swap(zones[i], zones[largest]); // Swap root with largest
+        heapify(zones, n, largest);    // Recursively heapify the affected subtree
     }
+}
 
-    void displayAllZones() {
-        if (!zones.empty()) {
-            cout &lt;&lt; "\nDisaster Zones and Severity Levels:" &lt;&lt; endl;
-            for (const auto& pair : zones) {
-                cout &lt;&lt; "Zone " &lt;&lt; pair.first &lt;&lt; ": Severity Level " &lt;&lt; pair.second &lt;&lt; endl;
-            }
-        } else {
-            cout &lt;&lt; "No zones available." &lt;&lt; endl;
-        }
+// Function to perform Heap Sort
+void heapSort(vector&lt;pair&lt;int, int&gt;&gt; &zones) {
+    int n = zones.size();
+
+    // Build heap (rearrange array)
+    for (int i = n / 2 - 1; i &gt;= 0; i--)
+        heapify(zones, n, i);
+
+    // Extract elements from heap one by one
+    for (int i = n - 1; i &gt;= 0; i--) {
+        // Move current root to end
+        swap(zones[0], zones[i]);
+
+        // Call max heapify on the reduced heap
+        heapify(zones, i, 0);
     }
-};
+}
+
+// Function to map severity levels to numerical values
+int severityToValue(const string &severity) {
+    if (severity == "High")
+        return 3;
+    else if (severity == "Medium")
+        return 2;
+    else if (severity == "Low")
+        return 1;
+    return 0;
+}
+
+// Function to display zones
+void displayZones(const vector&lt;pair&lt;int, int&gt;&gt; &zones) {
+    for (const auto &zone : zones) {
+        cout &lt;&lt; "Zone " &lt;&lt; zone.first &lt;&lt; " - Severity: " &lt;&lt; zone.second &lt;&lt; endl;
+    }
+    cout &lt;&lt; endl;
+}
 
 int main() {
-    DisasterImpactMapping disasterMapping;
+    // Example: Zones with their severity levels
+    vector&lt;pair&lt;int, string&gt;&gt; inputZones = {
+        {1, "Medium"},
+        {2, "High"},
+        {3, "Low"},
+        {4, "High"},
+        {5, "Medium"}};
 
-    disasterMapping.addOrUpdateZone("ZoneA", "High");
-    disasterMapping.addOrUpdateZone("ZoneB", "Medium");
-    disasterMapping.addOrUpdateZone("ZoneC", "Low");
+    // Convert severity levels to numerical values
+    vector&lt;pair&lt;int, int&gt;&gt; zones;
+    for (const auto &zone : inputZones) {
+        zones.push_back({zone.first, severityToValue(zone.second)});
+    }
 
-    cout &lt;&lt; "Severity of ZoneA: " &lt;&lt; disasterMapping.getZoneSeverity("ZoneA") &lt;&lt; endl;
+    cout &lt;&lt; "Before Sorting:\n";
+    displayZones(zones);
 
-    disasterMapping.removeZone("ZoneB");
+    // Sort the zones using Heap Sort
+    heapSort(zones);
 
-    disasterMapping.displayAllZones();
+    cout &lt;&lt; "After Sorting (High Priority First):\n";
+    displayZones(zones);
 
     return 0;
 }
-        </pre>
-    </div>
+    </code></pre>
 </body>
 </html>

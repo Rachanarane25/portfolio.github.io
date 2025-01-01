@@ -3,152 +3,241 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu-Driven Program Documentation</title>
+    <title>Disaster Impact Mapping and Algorithms</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
-            line-height: 1.6;
-            background-color: #f9f9f9;
+            background-color: #f4f4f9;
+        }
+        h1 {
+            text-align: center;
             color: #333;
         }
-        h1, h2 {
-            color: #0056b3;
-        }
-        .section {
-            margin-bottom: 20px;
-            padding: 10px;
-            background-color: #fff;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+        pre {
+            background: #282c34;
+            color: #abb2bf;
+            padding: 20px;
+            border-radius: 8px;
+            overflow: auto;
+            font-size: 14px;
         }
         code {
-            background-color: #f4f4f4;
-            padding: 2px 4px;
-            border-radius: 4px;
-            font-size: 90%;
-        }
-        pre {
-            background-color: #f4f4f4;
-            padding: 10px;
-            border-radius: 5px;
-            overflow-x: auto;
-        }
-        .menu {
-            background-color: #e8f4fa;
-            padding: 10px;
-            border: 1px solid #bce0f9;
-            border-radius: 5px;
+            font-family: Consolas, "Courier New", monospace;
         }
     </style>
 </head>
 <body>
-    <h1>Menu-Driven Program</h1>
-    <p>This C++ program is a menu-driven application that provides three main functionalities:</p>
-    <ol>
-        <li><strong>Disaster Impact Mapping</strong></li>
-        <li><strong>Dijkstra's Algorithm</strong></li>
-        <li><strong>Kruskal's Algorithm</strong></li>
-    </ol>
+    <h1>Disaster Impact Mapping and Algorithms</h1>
+    <pre><code>#include &lt;iostream&gt;
+#include &lt;unordered_map&gt;
+#include &lt;string&gt;
+#include &lt;vector&gt;
+#include &lt;queue&gt;
+#include &lt;climits&gt;
+#include &lt;algorithm&gt;
+using namespace std;
 
-    <div class="section">
-        <h2>1. Disaster Impact Mapping</h2>
-        <p>The Disaster Impact Mapping feature allows users to manage disaster zones and their severity levels. The available operations are:</p>
-        <ul>
-            <li><strong>Add/Update Zone:</strong> Add or update a disaster zone with a severity level (High, Medium, Low).</li>
-            <li><strong>Get Zone Severity:</strong> Retrieve the severity level of a specific zone.</li>
-            <li><strong>Remove Zone:</strong> Delete a disaster zone from the mapping.</li>
-            <li><strong>Display All Zones:</strong> List all zones along with their severity levels.</li>
-        </ul>
-        <div class="menu">
-            <p>Sample Input:</p>
-            <pre>
-Enter Zone ID: ZoneA
-Enter Severity Level: High
-            </pre>
-            <p>Sample Output:</p>
-            <pre>
-Zone ZoneA updated with severity level: High
-            </pre>
-        </div>
-    </div>
+// Disaster Impact Mapping Class
+class DisasterImpactMapping {
+private:
+    unordered_map&lt;string, string&gt; zones;
 
-    <div class="section">
-        <h2>2. Dijkstra's Algorithm</h2>
-        <p>Dijkstra's algorithm finds the shortest paths from a source vertex to all other vertices in a weighted graph.</p>
-        <p><strong>Inputs:</strong></p>
-        <ul>
-            <li>Number of vertices</li>
-            <li>Number of edges</li>
-            <li>Edges with weights</li>
-            <li>Source vertex</li>
-        </ul>
-        <div class="menu">
-            <p>Sample Input:</p>
-            <pre>
-Enter the number of vertices: 5
-Enter the number of edges: 6
-Enter edges (u v weight):
-0 1 10
-0 3 30
-0 4 100
-1 2 50
-3 2 20
-2 4 10
-Enter the source vertex: 0
-            </pre>
-            <p>Sample Output:</p>
-            <pre>
-Vertex    Distance from Source    Penultimate Vertex
-0         0                       -1
-1         10                      0
-2         50                      3
-3         30                      0
-4         60                      2
-            </pre>
-        </div>
-    </div>
+public:
+    void addOrUpdateZone(const string&amp; zone_id, const string&amp; severity_level) {
+        zones[zone_id] = severity_level;
+        cout &lt;&lt; "Zone " &lt;&lt; zone_id &lt;&lt; " updated with severity level: " &lt;&lt; severity_level &lt;&lt; endl;
+    }
 
-    <div class="section">
-        <h2>3. Kruskal's Algorithm</h2>
-        <p>Kruskal's algorithm finds the Minimum Spanning Tree (MST) of a graph. The MST connects all vertices with the minimum total weight without cycles.</p>
-        <p><strong>Inputs:</strong></p>
-        <ul>
-            <li>Number of vertices</li>
-            <li>Number of edges</li>
-            <li>Edges with weights</li>
-        </ul>
-        <div class="menu">
-            <p>Sample Input:</p>
-            <pre>
-Enter the number of vertices: 4
-Enter the number of edges: 5
-Enter edges (u v weight):
-0 1 10
-0 2 6
-0 3 5
-1 3 15
-2 3 4
-            </pre>
-            <p>Sample Output:</p>
-            <pre>
-Edges in the Minimum Spanning Tree (MST):
-2 - 3 : 4
-0 - 3 : 5
-0 - 1 : 10
-            </pre>
-        </div>
-    </div>
+    string getZoneSeverity(const string&amp; zone_id) {
+        if (zones.find(zone_id) != zones.end()) {
+            return zones[zone_id];
+        } else {
+            cout &lt;&lt; "Zone " &lt;&lt; zone_id &lt;&lt; " not found." &lt;&lt; endl;
+            return "";
+        }
+    }
 
-    <div class="section">
-        <h2>Exit</h2>
-        <p>The program can be exited at any time by selecting the <strong>Exit</strong> option from the main menu.</p>
-        <div class="menu">
-            <p>Sample Output:</p>
-            <pre>
-Exiting program. Goodbye!
-            </pre>
-        </div>
-    </div>
-</body>
-</html>
+    void removeZone(const string&amp; zone_id) {
+        if (zones.find(zone_id) != zones.end()) {
+            zones.erase(zone_id);
+            cout &lt;&lt; "Zone " &lt;&lt; zone_id &lt;&lt; " has been removed." &lt;&lt; endl;
+        } else {
+            cout &lt;&lt; "Zone " &lt;&lt; zone_id &lt;&lt; " not found." &lt;&lt; endl;
+        }
+    }
+
+    void displayAllZones() {
+        if (!zones.empty()) {
+            cout &lt;&lt; "\nDisaster Zones and Severity Levels:" &lt;&lt; endl;
+            for (const auto&amp; pair : zones) {
+                cout &lt;&lt; "Zone " &lt;&lt; pair.first &lt;&lt; ": Severity Level " &lt;&lt; pair.second &lt;&lt; endl;
+            }
+        } else {
+            cout &lt;&lt; "No zones available." &lt;&lt; endl;
+        }
+    }
+};
+
+// Dijkstra's Algorithm Function
+struct Edge {
+    int to, weight;
+};
+
+struct Compare {
+    bool operator()(pair&lt;int, int&gt; a, pair&lt;int, int&gt; b) {
+        return a.second &gt; b.second;
+    }
+};
+
+void Dijkstra(vector&lt;vector&lt;Edge&gt;&gt;&amp; graph, int source) {
+    int V = graph.size();
+    vector&lt;int&gt; dist(V, INT_MAX);
+    vector&lt;int&gt; prev(V, -1);
+    vector&lt;bool&gt; visited(V, false);
+
+    priority_queue&lt;pair&lt;int, int&gt;, vector&lt;pair&lt;int, int&gt;&gt;, Compare&gt; pq;
+    dist[source] = 0;
+    pq.push({source, 0});
+
+    while (!pq.empty()) {
+        int u = pq.top().first;
+        pq.pop();
+
+        if (visited[u]) continue;
+        visited[u] = true;
+
+        for (const Edge&amp; edge : graph[u]) {
+            int v = edge.to;
+            int weight = edge.weight;
+
+            if (!visited[v] &amp;&amp; dist[u] + weight &lt; dist[v]) {
+                dist[v] = dist[u] + weight;
+                prev[v] = u;
+                pq.push({v, dist[v]});
+            }
+        }
+    }
+
+    cout &lt;&lt; "Vertex\tDistance from Source\tPenultimate Vertex\n";
+    for (int i = 0; i &lt; V; ++i) {
+        cout &lt;&lt; i &lt;&lt; "\t" &lt;&lt; dist[i] &lt;&lt; "\t\t\t" &lt;&lt; prev[i] &lt;&lt; "\n";
+    }
+}
+
+// Kruskal's Algorithm Functions
+struct EdgeK {
+    int u, v, weight;
+};
+
+class DisjointSet {
+public:
+    vector&lt;int&gt; parent, rank;
+
+    DisjointSet(int n) {
+        parent.resize(n);
+        rank.resize(n, 0);
+        for (int i = 0; i &lt; n; ++i)
+            parent[i] = i;
+    }
+
+    int find(int u) {
+        if (parent[u] != u)
+            parent[u] = find(parent[u]); // Path compression
+        return parent[u];
+    }
+
+    void unionSet(int u, int v) {
+        int rootU = find(u);
+        int rootV = find(v);
+
+        if (rootU != rootV) {
+            if (rank[rootU] &gt; rank[rootV])
+                parent[rootV] = rootU;
+            else if (rank[rootU] &lt; rank[rootV])
+                parent[rootU] = rootV;
+            else {
+                parent[rootV] = rootU;
+                rank[rootU]++;
+            }
+        }
+    }
+};
+
+vector&lt;EdgeK&gt; kruskal(int V, vector&lt;EdgeK&gt;&amp; edges) {
+    sort(edges.begin(), edges.end(), [](EdgeK&amp; e1, EdgeK&amp; e2) {
+        return e1.weight &lt; e2.weight;
+    });
+
+    DisjointSet ds(V);
+    vector&lt;EdgeK&gt; mst;
+
+    for (const auto&amp; edge : edges) {
+        int u = edge.u, v = edge.v;
+
+        if (ds.find(u) != ds.find(v)) {
+            mst.push_back(edge);
+            ds.unionSet(u, v);
+        }
+    }
+
+    return mst;
+}
+
+int main() {
+    while (true) {
+        cout &lt;&lt; "\n--- Menu ---\n";
+        cout &lt;&lt; "1. Disaster Impact Mapping\n";
+        cout &lt;&lt; "2. Dijkstra's Algorithm\n";
+        cout &lt;&lt; "3. Kruskal's Algorithm\n";
+        cout &lt;&lt; "4. Exit\n";
+        cout &lt;&lt; "Enter your choice: ";
+        int choice;
+        cin &gt;&gt; choice;
+
+        if (choice == 1) {
+            DisasterImpactMapping disasterMapping;
+            while (true) {
+                cout &lt;&lt; "\n--- Disaster Impact Mapping ---\n";
+                cout &lt;&lt; "1. Add/Update Zone\n";
+                cout &lt;&lt; "2. Get Zone Severity\n";
+                cout &lt;&lt; "3. Remove Zone\n";
+                cout &lt;&lt; "4. Display All Zones\n";
+                cout &lt;&lt; "5. Back to Main Menu\n";
+                cout &lt;&lt; "Enter your choice: ";
+                int subChoice;
+                cin &gt;&gt; subChoice;
+
+                if (subChoice == 1) {
+                    string zone, severity;
+                    cout &lt;&lt; "Enter Zone ID: ";
+                    cin &gt;&gt; zone;
+                    cout &lt;&lt; "Enter Severity Level (High, Medium, Low): ";
+                    cin &gt;&gt; severity;
+                    disasterMapping.addOrUpdateZone(zone, severity);
+                } else if (subChoice == 2) {
+                    string zone;
+                    cout &lt;&lt; "Enter Zone ID: ";
+                    cin &gt;&gt; zone;
+                    cout &lt;&lt; "Severity: " &lt;&lt; disasterMapping.getZoneSeverity(zone) &lt;&lt; endl;
+                } else if (subChoice == 3) {
+                    string zone;
+                    cout &lt;&lt; "Enter Zone ID: ";
+                    cin &gt;&gt; zone;
+                    disasterMapping.removeZone(zone);
+                } else if (subChoice == 4) {
+                    disasterMapping.displayAllZones();
+                } else if (subChoice == 5) {
+                    break;
+                }
+            }
+        } else if (choice == 2) {
+            int V;
+            cout &lt;&lt; "Enter the number of vertices: ";
+            cin &gt;&gt; V;
+
+            vector&lt;vector&lt;Edge&gt;&gt; graph(V);
+            int edges;
+            cout &lt;&lt; "Enter the number of edges: ";
+            cin &gt;&gt; edges;
+            cout &lt;&lt; "Enter edges (u v weight):\n

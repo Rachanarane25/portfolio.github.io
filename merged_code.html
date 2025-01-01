@@ -3,116 +3,152 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Disaster Management System</title>
+    <title>Menu-Driven Program Documentation</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        h1, h2 {
+            color: #0056b3;
+        }
+        .section {
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-size: 90%;
         }
         pre {
             background-color: #f4f4f4;
-            border: 1px solid #ddd;
-            border-radius: 5px;
             padding: 10px;
+            border-radius: 5px;
             overflow-x: auto;
         }
-        code {
-            font-family: Consolas, Monaco, "Courier New", monospace;
-            font-size: 14px;
-        }
-        h1 {
-            color: #333;
+        .menu {
+            background-color: #e8f4fa;
+            padding: 10px;
+            border: 1px solid #bce0f9;
+            border-radius: 5px;
         }
     </style>
 </head>
 <body>
-    <h1>Disaster Management System - C++ Code</h1>
-    <p>This is a disaster management system implemented in C++. Below is the source code:</p>
-    <pre><code>
-#include&lt;iostream&gt;
-#include&lt;vector&gt;
-#include&lt;stack&gt;
-#include&lt;string&gt;
-#include &lt;unordered_map&gt;
-#include&lt;math.h&gt;
-#include &lt;bits/stdc++.h&gt;
-#define INF 99999
+    <h1>Menu-Driven Program</h1>
+    <p>This C++ program is a menu-driven application that provides three main functionalities:</p>
+    <ol>
+        <li><strong>Disaster Impact Mapping</strong></li>
+        <li><strong>Dijkstra's Algorithm</strong></li>
+        <li><strong>Kruskal's Algorithm</strong></li>
+    </ol>
 
-using namespace std;
+    <div class="section">
+        <h2>1. Disaster Impact Mapping</h2>
+        <p>The Disaster Impact Mapping feature allows users to manage disaster zones and their severity levels. The available operations are:</p>
+        <ul>
+            <li><strong>Add/Update Zone:</strong> Add or update a disaster zone with a severity level (High, Medium, Low).</li>
+            <li><strong>Get Zone Severity:</strong> Retrieve the severity level of a specific zone.</li>
+            <li><strong>Remove Zone:</strong> Delete a disaster zone from the mapping.</li>
+            <li><strong>Display All Zones:</strong> List all zones along with their severity levels.</li>
+        </ul>
+        <div class="menu">
+            <p>Sample Input:</p>
+            <pre>
+Enter Zone ID: ZoneA
+Enter Severity Level: High
+            </pre>
+            <p>Sample Output:</p>
+            <pre>
+Zone ZoneA updated with severity level: High
+            </pre>
+        </div>
+    </div>
 
-int visited[10],v=8,m[10][10]= {{0,0,1,0,0,0,0,0},
-    {0,0,1,1,0,0,0,0},
-    {1,1,0,1,0,0,0,0},
-    {0,1,1,0,1,1,0,0},
-    {0,0,0,1,0,1,1,0},
-    {0,0,0,1,1,0,1,0},
-    {0,0,0,0,1,1,0,1},
-    {0,0,0,0,0,0,1,0}
-};
-int path[10],j=0;
-const int vert = 4;
-unordered_map&lt;string,string&gt; impactmap;
+    <div class="section">
+        <h2>2. Dijkstra's Algorithm</h2>
+        <p>Dijkstra's algorithm finds the shortest paths from a source vertex to all other vertices in a weighted graph.</p>
+        <p><strong>Inputs:</strong></p>
+        <ul>
+            <li>Number of vertices</li>
+            <li>Number of edges</li>
+            <li>Edges with weights</li>
+            <li>Source vertex</li>
+        </ul>
+        <div class="menu">
+            <p>Sample Input:</p>
+            <pre>
+Enter the number of vertices: 5
+Enter the number of edges: 6
+Enter edges (u v weight):
+0 1 10
+0 3 30
+0 4 100
+1 2 50
+3 2 20
+2 4 10
+Enter the source vertex: 0
+            </pre>
+            <p>Sample Output:</p>
+            <pre>
+Vertex    Distance from Source    Penultimate Vertex
+0         0                       -1
+1         10                      0
+2         50                      3
+3         30                      0
+4         60                      2
+            </pre>
+        </div>
+    </div>
 
-void changes(unordered_map&lt;string,string&gt;&impactmap)
-{
-    // Function implementation
-}
+    <div class="section">
+        <h2>3. Kruskal's Algorithm</h2>
+        <p>Kruskal's algorithm finds the Minimum Spanning Tree (MST) of a graph. The MST connects all vertices with the minimum total weight without cycles.</p>
+        <p><strong>Inputs:</strong></p>
+        <ul>
+            <li>Number of vertices</li>
+            <li>Number of edges</li>
+            <li>Edges with weights</li>
+        </ul>
+        <div class="menu">
+            <p>Sample Input:</p>
+            <pre>
+Enter the number of vertices: 4
+Enter the number of edges: 5
+Enter edges (u v weight):
+0 1 10
+0 2 6
+0 3 5
+1 3 15
+2 3 4
+            </pre>
+            <p>Sample Output:</p>
+            <pre>
+Edges in the Minimum Spanning Tree (MST):
+2 - 3 : 4
+0 - 3 : 5
+0 - 1 : 10
+            </pre>
+        </div>
+    </div>
 
-void deletezone(unordered_map&lt;string,string&gt;&impactmap)
-{
-    // Function implementation
-}
-
-void searchzone(unordered_map&lt;string,string&gt;&impactmap)
-{
-    // Function implementation
-}
-
-void hashingdisplay(unordered_map&lt;string,string&gt;&impactmap)
-{
-    // Function implementation
-}
-
-void addzone(unordered_map&lt;string,string&gt;&impactmap)
-{
-    // Function implementation
-}
-
-void hashing_2(int *c)
-{
-    // Function implementation
-}
-
-vector&lt;int&gt; bellf(int V,vector&lt;vector&lt;int&gt;&gt; &edges,int source,vector&lt;int&gt;&parent)
-{
-    // Function implementation
-}
-
-void paths(int vertex,vector&lt;int&gt;&parent)
-{
-    // Function implementation
-}
-
-void bellmanford_4()
-{
-    // Function implementation
-}
-
-void dfs(int m[10][10],int v,int source)
-{
-    // Function implementation
-}
-
-void dfs_10()
-{
-    // Function implementation
-}
-
-int main()
-{
-    // Main function implementation
-}
-    </code></pre>
-    <p>Copy the code above and paste it into your favorite C++ compiler to test its functionality!</p>
+    <div class="section">
+        <h2>Exit</h2>
+        <p>The program can be exited at any time by selecting the <strong>Exit</strong> option from the main menu.</p>
+        <div class="menu">
+            <p>Sample Output:</p>
+            <pre>
+Exiting program. Goodbye!
+            </pre>
+        </div>
+    </div>
 </body>
 </html>

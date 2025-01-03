@@ -3,90 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>C++ Dijkstra Algorithm Code</title>
+    <title>Dijkstra's Algorithm</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
         }
         pre {
-            background-color: #f4f4f4;
-            border: 1px solid #ccc;
-            padding: 10px;
-            border-radius: 5px;
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            border-radius: 8px;
             overflow-x: auto;
         }
         code {
             font-family: Consolas, "Courier New", monospace;
+            font-size: 14px;
         }
     </style>
 </head>
 <body>
-    <h1>C++ Dijkstra Algorithm Code</h1>
+    <h1>Dijkstra's Algorithm (C++ Code)</h1>
+    <p>The code below demonstrates the implementation of Dijkstra's algorithm using an adjacency matrix. It calculates the shortest path from a source vertex to all other vertices in a graph.</p>
     <pre><code>
 #include &lt;iostream&gt;
 #include &lt;vector&gt;
-#include &lt;queue&gt;
 #include &lt;climits&gt;
 using namespace std;
 
-struct Edge {
-    int to, weight;
-};
-
-struct Compare {
-    bool operator()(pair&lt;int, int&gt; a, pair&lt;int, int&gt; b) {
-        return a.second &gt; b.second;
+// Function to find the vertex with the smallest distance that hasn't been visited yet
+int findMinVertex(vector&lt;int&gt; &amp;dist, vector&lt;bool&gt; &amp;visited, int V) {
+    int minVertex = -1;
+    for (int i = 0; i &lt; V; i++) {
+        if (!visited[i] &amp;&amp; (minVertex == -1 || dist[i] &lt; dist[minVertex])) {
+            minVertex = i;
+        }
     }
-};
+    return minVertex;
+}
 
-void Dijkstra(vector&lt;vector&lt;Edge&gt;&gt;& graph, int source) {
-    int V = graph.size();
-    vector&lt;int&gt; dist(V, INT_MAX);       
-    vector&lt;int&gt; prev(V, -1);           
-    vector&lt;bool&gt; visited(V, false);    
+void dijkstra(vector&lt;vector&lt;int&gt;&gt; &amp;graph, int source, int V) {
+    vector&lt;int&gt; dist(V, INT_MAX);       // Stores shortest distances from the source
+    vector&lt;int&gt; prev(V, -1);           // Stores the parent of each vertex in the shortest path
+    vector&lt;bool&gt; visited(V, false);    // Keeps track of visited vertices
 
-    priority_queue&lt;pair&lt;int, int&gt;, vector&lt;pair&lt;int, int&gt;&gt;, Compare&gt; pq;
-    dist[source] = 0;
-    pq.push({source, 0}); 
+    dist[source] = 0; // Distance to the source is 0
 
-    while (!pq.empty()) {
-        int u = pq.top().first; 
-        pq.pop();
-
-        if (visited[u]) continue;
+    // Main Dijkstra's algorithm loop
+    for (int i = 0; i &lt; V - 1; i++) {
+        // Find the vertex with the smallest distance
+        int u = findMinVertex(dist, visited, V);
         visited[u] = true;
 
-        for (const Edge& edge : graph[u]) {
-            int v = edge.to;
-            int weight = edge.weight;
-
-            if (!visited[v] && dist[u] + weight &lt; dist[v]) {
-                dist[v] = dist[u] + weight;
+        // Update the distances of adjacent vertices
+        for (int v = 0; v &lt; V; v++) {
+            if (graph[u][v] != 0 &amp;&amp; !visited[v] &amp;&amp; dist[u] != INT_MAX &amp;&amp; dist[u] + graph[u][v] &lt; dist[v]) {
+                dist[v] = dist[u] + graph[u][v];
                 prev[v] = u;
-                pq.push({v, dist[v]});
             }
         }
     }
 
+    // Print the results
     cout &lt;&lt; "Vertex\tDistance from Source\tPenultimate Vertex\n";
-    for (int i = 0; i &lt; V; ++i) {
+    for (int i = 0; i &lt; V; i++) {
         cout &lt;&lt; i &lt;&lt; "\t" &lt;&lt; dist[i] &lt;&lt; "\t\t\t" &lt;&lt; prev[i] &lt;&lt; "\n";
     }
 }
 
 int main() {
-    int V = 5;
-    vector&lt;vector&lt;Edge&gt;&gt;& graph(V);
+    int V = 5; // Number of vertices
+    vector&lt;vector&lt;int&gt;&gt; graph = {
+        {0, 10, 0, 30, 100},
+        {0, 0, 50, 0, 0},
+        {0, 0, 0, 0, 10},
+        {0, 0, 20, 0, 60},
+        {0, 0, 0, 0, 0}
+    };
 
-    graph[0] = {{1, 10}, {3, 30}, {4, 100}};
-    graph[1] = {{2, 50}};
-    graph[2] = {{4, 10}};
-    graph[3] = {{2, 20}, {4, 60}};
-    graph[4] = {};
-
-    int source = 0;
-    Dijkstra(graph, source);
+    int source = 0; // Starting vertex
+    dijkstra(graph, source, V);
 
     return 0;
 }

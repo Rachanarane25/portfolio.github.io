@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dijkstra's Algorithm (C++)</title>
+    <title>Dijkstra's Algorithm with Min-Heap (C++)</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -30,43 +30,47 @@
     </style>
 </head>
 <body>
-    <h1>Dijkstra's Algorithm (C++)</h1>
-    <p>The code below demonstrates the implementation of Dijkstra's algorithm using an adjacency matrix to find the shortest paths in a graph.</p>
+    <h1>Dijkstra's Algorithm with Min-Heap (C++)</h1>
+    <p>The code below demonstrates the implementation of Dijkstra's algorithm using a min-heap (priority queue) to find the shortest paths in a graph.</p>
     <pre><code>
 #include &lt;iostream&gt;
 #include &lt;vector&gt;
 #include &lt;climits&gt;
+#include &lt;queue&gt;
 using namespace std;
 
-// Function to find the vertex with the smallest distance that hasn't been visited yet
-int findMinVertex(vector&lt;int&gt; &amp;dist, vector&lt;bool&gt; &amp;visited, int V) {
-    int minVertex = -1;
-    for (int i = 0; i &lt; V; i++) {
-        if (!visited[i] &amp;&amp; (minVertex == -1 || dist[i] &lt; dist[minVertex])) {
-            minVertex = i;
-        }
+// Define a comparison function for the priority queue
+struct Compare {
+    bool operator()(pair&lt;int, int&gt;&amp; a, pair&lt;int, int&gt;&amp; b) {
+        return a.second &gt; b.second; // Compare based on distance
     }
-    return minVertex;
-}
+};
 
-void dijkstra(vector&lt;vector&lt;int&gt;&gt; &amp;graph, int source, int V) {
-    vector&lt;int&gt; dist(V, INT_MAX);       // Stores shortest distances from the source
-    vector&lt;int&gt; prev(V, -1);           // Stores the parent of each vertex in the shortest path
-    vector&lt;bool&gt; visited(V, false);    // Keeps track of visited vertices
+void dijkstra(vector&lt;vector&lt;int&gt;&gt;&amp; graph, int source, int V) {
+    vector&lt;int&gt; dist(V, INT_MAX);  // Stores shortest distances from the source
+    vector&lt;int&gt; prev(V, -1);       // Stores the parent of each vertex in the shortest path
+    vector&lt;bool&gt; visited(V, false); // Keeps track of visited vertices
 
     dist[source] = 0; // Distance to the source is 0
 
-    // Main Dijkstra's algorithm loop
-    for (int i = 0; i &lt; V - 1; i++) {
-        // Find the vertex with the smallest distance
-        int u = findMinVertex(dist, visited, V);
-        visited[u] = true;
+    // Priority queue (min-heap) to select the vertex with the smallest distance
+    priority_queue&lt;pair&lt;int, int&gt;, vector&lt;pair&lt;int, int&gt;&gt;, Compare&gt; pq;
+    pq.push({source, 0}); // Push the source vertex with distance 0
+
+    while (!pq.empty()) {
+        int u = pq.top().first; // Get the vertex with the smallest distance
+        pq.pop();
+        
+        if (visited[u]) continue; // If the vertex is already visited, skip it
+
+        visited[u] = true; // Mark the vertex as visited
 
         // Update the distances of adjacent vertices
         for (int v = 0; v &lt; V; v++) {
-            if (graph[u][v] != 0 &amp;&amp; !visited[v] &amp;&amp; dist[u] != INT_MAX &amp;&amp; dist[u] + graph[u][v] &lt; dist[v]) {
-                dist[v] = dist[u] + graph[u][v];
-                prev[v] = u;
+            if (graph[u][v] != 0 &amp;&amp; !visited[v] &amp;&amp; dist[u] + graph[u][v] &lt; dist[v]) {
+                dist[v] = dist[u] + graph[u][v]; // Update distance
+                prev[v] = u; // Update the parent of vertex v
+                pq.push({v, dist[v]}); // Push the updated distance of vertex v into the priority queue
             }
         }
     }

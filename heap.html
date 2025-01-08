@@ -3,111 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>C++ Heap Operations Code</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        pre {
-            background-color: #f4f4f4;
-            border: 1px solid #ccc;
-            padding: 10px;
-            border-radius: 5px;
-            overflow-x: auto;
-        }
-        code {
-            font-family: Consolas, "Courier New", monospace;
-        }
-    </style>
+    <title>Heap Sort Algorithm</title>
+    <!-- Include Highlight.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/default.min.css">
 </head>
 <body>
-    <h1>C++ Heap Operations Code</h1>
-    <pre><code>
-#include &lt;iostream&gt;
-#include &lt;vector&gt;
-#include &lt;cmath&gt;
+    <h1>Heap Sort Algorithm Code</h1>
+    <pre><code class="language-cpp">
+#include <bits/stdc++.h>
 using namespace std;
 
-void HeapBottomUp(vector&lt;int&gt;& H) {
-    int n = H.size() - 1; 
-    for (int i = n / 2; i &gt;= 1; --i) {
-        int k = i;
-        int v = H[k];
-        bool heap = false;
-
-        while (!heap &amp;&amp; 2 * k &lt;= n) {
-            int j = 2 * k;
-            if (j &lt; n &amp;&amp; H[j] &lt; H[j + 1]) {
+void heapify(vector<pair<int,int>>& h, int& n) {
+    int i, j, k;
+    pair<int, int> v;
+    bool heap;
+    for (i = n / 2; i >= 1; i--) {
+        k = i;
+        v = h[k];
+        heap = false;
+        while (!heap && 2 * k <= n) {
+            j = 2 * k;
+            if (j < n && h[j].second < h[j + 1].second)
                 j = j + 1;
-            }
-            if (v &gt;= H[j]) {
+            if (v.second >= h[j].second)
                 heap = true;
-            } else {
-                H[k] = H[j];
+            else {
+                h[k] = h[j];
                 k = j;
             }
         }
-        H[k] = v;
+        h[k] = v;
     }
 }
 
-void DeleteMax(vector&lt;int&gt;& H) {
-    int n = H.size() - 1;
-    if (n &lt; 1) return; 
-    swap(H[1], H[n]);
-
-    H.pop_back();
-    n--;
-
-    int k = 1;
-    int v = H[k];
-    bool heap = false;
-
-    while (!heap &amp;&amp; 2 * k &lt;= n) {
-        int j = 2 * k;
-        if (j &lt; n &amp;&amp; H[j] &lt; H[j + 1]) {
-            j = j + 1;
-        }
-        if (v &gt;= H[j]) {
-            heap = true;
-        } else {
-            H[k] = H[j];
-            k = j;
-        }
-    }
-    if (k &lt;= n) {
-        H[k] = v;
+void heapsort(vector<pair<int, int>>& h, int& n, vector<pair<int, int>>& d) {
+    while (h.size() != 0) {
+        d.push_back(h[1]);
+        swap(h[1], h[n]);
+        h.pop_back();
+        n--;
+        heapify(h, n);
     }
 }
 
-int main() {
-    vector&lt;int&gt;& H = {0, 4, 10, 3, 5, 1}; 
+void heapsort_7() {
+    vector<pair<int, int>> h(1);
+    int n = 5, l = 5;
 
-    cout &lt;&lt; "Original array: ";
-    for (int i = 1; i &lt; H.size(); ++i) {
-        cout &lt;&lt; H[i] &lt;&lt; " ";
+    h.push_back({1, 10});
+    h.push_back({2, 20});
+    h.push_back({3, 15});
+    h.push_back({4, 30});
+    h.push_back({5, 40});
+
+    heapify(h, n);
+
+    cout << "\n\nConsidering the input as the 'safety bar' : higher the value, higher the risk\n";
+    cout << "\nZones before prioritization\n";
+
+    for (int i = 1; i <= l; i++) {
+        cout << "Location : " << h[i].first << " , Risk " << h[i].second << "\n";
     }
-    cout &lt;&lt; endl;
+    cout << "\n\nZones after prioritization\n";
 
-    HeapBottomUp(H);
+    vector<pair<int, int>> d(1);
+    heapsort(h, n, d);
 
-    cout &lt;&lt; "Heap after HeapBottomUp: ";
-    for (int i = 1; i &lt; H.size(); ++i) {
-        cout &lt;&lt; H[i] &lt;&lt; " ";
+    for (int i = 1; i <= l; i++) {
+        cout << "Location : " << d[i].first << " , Risk " << d[i].second << "\n";
     }
-    cout &lt;&lt; endl;
-
-    DeleteMax(H);
-
-    cout &lt;&lt; "Heap after DeleteMax: ";
-    for (int i = 1; i &lt; H.size(); ++i) {
-        cout &lt;&lt; H[i] &lt;&lt; " ";
-    }
-    cout &lt;&lt; endl;
-
-    return 0;
 }
     </code></pre>
+
+    <!-- Include Highlight.js JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
 </body>
 </html>

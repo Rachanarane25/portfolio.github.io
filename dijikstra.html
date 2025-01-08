@@ -3,100 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dijkstra's Algorithm with Min-Heap (C++)</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #f5f5dc; /* Beige background for the page */
-            color: #333;
-        }
-        h1 {
-            text-align: center;
-            color: #2c3e50;
-        }
-        pre {
-            background-color: #f4f4f4; /* Light gray background for the code block */
-            border: 1px solid #ccc;
-            padding: 20px;
-            border-radius: 5px;
-            overflow-x: auto;
-            line-height: 1.6; /* Normal line height */
-        }
-        code {
-            font-family: Consolas, "Courier New", monospace;
-            font-size: 16px;
-        }
-    </style>
+    <title>Dijkstra's Algorithm</title>
+    <!-- Include Highlight.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/default.min.css">
 </head>
 <body>
-    <h1>Dijkstra's Algorithm with Min-Heap (C++)</h1>
-    <p>The code below demonstrates the implementation of Dijkstra's algorithm using a min-heap (priority queue) to find the shortest paths in a graph.</p>
-    <pre><code>
-#include &lt;iostream&gt;
-#include &lt;vector&gt;
-#include &lt;climits&gt;
-#include &lt;queue&gt;
+    <h1>Dijkstra's Algorithm Code</h1>
+    <pre><code class="language-cpp">
+#include <bits/stdc++.h>
 using namespace std;
+using PII = pair<int, int>;
 
-// Define a comparison function for the priority queue
-struct Compare {
-    bool operator()(pair&lt;int, int&gt;&amp; a, pair&lt;int, int&gt;&amp; b) {
-        return a.second &gt; b.second; // Compare based on distance
-    }
-};
+vector<int> dijkstra(int n, vector<vector<PII>>& graph, int start) {
+    vector<int> distances(n, INT_MAX);
+    priority_queue<PII, vector<PII>, greater<PII>> pq;
 
-void dijkstra(vector&lt;vector&lt;int&gt;&gt;&amp; graph, int source, int V) {
-    vector&lt;int&gt; dist(V, INT_MAX);  // Stores shortest distances from the source
-    vector&lt;int&gt; prev(V, -1);       // Stores the parent of each vertex in the shortest path
-    vector&lt;bool&gt; visited(V, false); // Keeps track of visited vertices
-
-    dist[source] = 0; // Distance to the source is 0
-
-    // Priority queue (min-heap) to select the vertex with the smallest distance
-    priority_queue&lt;pair&lt;int, int&gt;, vector&lt;pair&lt;int, int&gt;&gt;, Compare&gt; pq;
-    pq.push({source, 0}); // Push the source vertex with distance 0
+    distances[start] = 0;
+    pq.push({0, start});
 
     while (!pq.empty()) {
-        int u = pq.top().first; // Get the vertex with the smallest distance
+        int dist = pq.top().first;
+        int node = pq.top().second;
         pq.pop();
-        
-        if (visited[u]) continue; // If the vertex is already visited, skip it
 
-        visited[u] = true; // Mark the vertex as visited
+        if (dist > distances[node]) continue;
 
-        // Update the distances of adjacent vertices
-        for (int v = 0; v &lt; V; v++) {
-            if (graph[u][v] != 0 &amp;&amp; !visited[v] &amp;&amp; dist[u] + graph[u][v] &lt; dist[v]) {
-                dist[v] = dist[u] + graph[u][v]; // Update distance
-                prev[v] = u; // Update the parent of vertex v
-                pq.push({v, dist[v]}); // Push the updated distance of vertex v into the priority queue
+        for (auto& edge : graph[node]) {
+            int weight = edge.first;
+            int neighbor = edge.second;
+
+            if (distances[node] + weight < distances[neighbor]) {
+                distances[neighbor] = distances[node] + weight;
+                pq.push({distances[neighbor], neighbor});
             }
         }
     }
 
-    // Print the results
-    cout &lt;&lt; "Vertex\tDistance from Source\tPenultimate Vertex\n";
-    for (int i = 0; i &lt; V; i++) {
-        cout &lt;&lt; i &lt;&lt; "\t" &lt;&lt; dist[i] &lt;&lt; "\t\t\t" &lt;&lt; prev[i] &lt;&lt; "\n";
+    return distances;
+}
+
+void dij_3() {
+    int n = 6;
+    vector<vector<PII>> graph(n);
+
+    graph[0].push_back({2, 1});
+    graph[0].push_back({4, 2});
+    graph[1].push_back({1, 2});
+    graph[1].push_back({7, 3});
+    graph[2].push_back({3, 3});
+    graph[2].push_back({1, 4});
+    graph[3].push_back({2, 5});
+    graph[4].push_back({5, 5});
+
+    int start = 0;
+
+    vector<int> distances = dijkstra(n, graph, start);
+
+    cout << "Shortest distances from node " << start << ":\n";
+    for (int i = 0; i < n; ++i) {
+        cout << "To node " << i << ": "
+             << (distances[i] == INT_MAX ? -1 : distances[i]) << '\n';
     }
 }
-
-int main() {
-    int V = 5; // Number of vertices
-    vector&lt;vector&lt;int&gt;&gt; graph = {
-        {0, 10, 0, 30, 100},
-        {0, 0, 50, 0, 0},
-        {0, 0, 0, 0, 10},
-        {0, 0, 20, 0, 60},
-        {0, 0, 0, 0, 0}
-    };
-
-    int source = 0; // Starting vertex
-    dijkstra(graph, source, V);
-
-    return 0;
-}
     </code></pre>
+
+    <!-- Include Highlight.js JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
 </body>
 </html>

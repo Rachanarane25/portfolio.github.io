@@ -3,241 +3,191 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Disaster Impact Mapping and Algorithms</title>
+    <title>Algorithm Menu</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
-            background-color: #f4f4f9;
         }
-        h1 {
-            text-align: center;
+        h2 {
             color: #333;
         }
         pre {
-            background: #282c34;
-            color: #abb2bf;
-            padding: 20px;
-            border-radius: 8px;
-            overflow: auto;
-            font-size: 14px;
-        }
-        code {
-            font-family: Consolas, "Courier New", monospace;
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
         }
     </style>
 </head>
 <body>
-    <h1>Disaster Impact Mapping and Algorithms</h1>
-    <pre><code>#include &lt;iostream&gt;
-#include &lt;unordered_map&gt;
-#include &lt;string&gt;
-#include &lt;vector&gt;
-#include &lt;queue&gt;
-#include &lt;climits&gt;
-#include &lt;algorithm&gt;
-using namespace std;
 
-// Disaster Impact Mapping Class
-class DisasterImpactMapping {
-private:
-    unordered_map&lt;string, string&gt; zones;
+    <h2>Algorithm Menu</h2>
+    <div>
+        <button onclick="runKruskal()">1. Resource Distribution Cost Minimization (Kruskal's)</button>
+        <button onclick="runDijkstra()">2. Optimal Evacuation Routing (Dijkstra's)</button>
+        <button onclick="runHeapSort()">3. High-Risk Zone Prioritization (Heap Sort)</button>
+        <button onclick="exitProgram()">4. Exit</button>
+    </div>
 
-public:
-    void addOrUpdateZone(const string&amp; zone_id, const string&amp; severity_level) {
-        zones[zone_id] = severity_level;
-        cout &lt;&lt; "Zone " &lt;&lt; zone_id &lt;&lt; " updated with severity level: " &lt;&lt; severity_level &lt;&lt; endl;
-    }
+    <h3>Result:</h3>
+    <pre id="result"></pre>
 
-    string getZoneSeverity(const string&amp; zone_id) {
-        if (zones.find(zone_id) != zones.end()) {
-            return zones[zone_id];
-        } else {
-            cout &lt;&lt; "Zone " &lt;&lt; zone_id &lt;&lt; " not found." &lt;&lt; endl;
-            return "";
-        }
-    }
+    <script>
+        // Kruskal's Algorithm Implementation
+        function runKruskal() {
+            const edges = [
+                {src: 0, dest: 1, weight: 4},
+                {src: 1, dest: 2, weight: 1},
+                {src: 0, dest: 2, weight: 3},
+                {src: 2, dest: 3, weight: 2},
+                {src: 1, dest: 3, weight: 5}
+            ];
+            
+            let parent = [], rank = [], mstEdges = [];
+            let mstCost = 0;
+            let n = 4;
 
-    void removeZone(const string&amp; zone_id) {
-        if (zones.find(zone_id) != zones.end()) {
-            zones.erase(zone_id);
-            cout &lt;&lt; "Zone " &lt;&lt; zone_id &lt;&lt; " has been removed." &lt;&lt; endl;
-        } else {
-            cout &lt;&lt; "Zone " &lt;&lt; zone_id &lt;&lt; " not found." &lt;&lt; endl;
-        }
-    }
-
-    void displayAllZones() {
-        if (!zones.empty()) {
-            cout &lt;&lt; "\nDisaster Zones and Severity Levels:" &lt;&lt; endl;
-            for (const auto&amp; pair : zones) {
-                cout &lt;&lt; "Zone " &lt;&lt; pair.first &lt;&lt; ": Severity Level " &lt;&lt; pair.second &lt;&lt; endl;
+            function find(u) {
+                if (parent[u] !== u) {
+                    parent[u] = find(parent[u]);
+                }
+                return parent[u];
             }
-        } else {
-            cout &lt;&lt; "No zones available." &lt;&lt; endl;
-        }
-    }
-};
 
-// Dijkstra's Algorithm Function
-struct Edge {
-    int to, weight;
-};
-
-struct Compare {
-    bool operator()(pair&lt;int, int&gt; a, pair&lt;int, int&gt; b) {
-        return a.second &gt; b.second;
-    }
-};
-
-void Dijkstra(vector&lt;vector&lt;Edge&gt;&gt;&amp; graph, int source) {
-    int V = graph.size();
-    vector&lt;int&gt; dist(V, INT_MAX);
-    vector&lt;int&gt; prev(V, -1);
-    vector&lt;bool&gt; visited(V, false);
-
-    priority_queue&lt;pair&lt;int, int&gt;, vector&lt;pair&lt;int, int&gt;&gt;, Compare&gt; pq;
-    dist[source] = 0;
-    pq.push({source, 0});
-
-    while (!pq.empty()) {
-        int u = pq.top().first;
-        pq.pop();
-
-        if (visited[u]) continue;
-        visited[u] = true;
-
-        for (const Edge&amp; edge : graph[u]) {
-            int v = edge.to;
-            int weight = edge.weight;
-
-            if (!visited[v] &amp;&amp; dist[u] + weight &lt; dist[v]) {
-                dist[v] = dist[u] + weight;
-                prev[v] = u;
-                pq.push({v, dist[v]});
-            }
-        }
-    }
-
-    cout &lt;&lt; "Vertex\tDistance from Source\tPenultimate Vertex\n";
-    for (int i = 0; i &lt; V; ++i) {
-        cout &lt;&lt; i &lt;&lt; "\t" &lt;&lt; dist[i] &lt;&lt; "\t\t\t" &lt;&lt; prev[i] &lt;&lt; "\n";
-    }
-}
-
-// Kruskal's Algorithm Functions
-struct EdgeK {
-    int u, v, weight;
-};
-
-class DisjointSet {
-public:
-    vector&lt;int&gt; parent, rank;
-
-    DisjointSet(int n) {
-        parent.resize(n);
-        rank.resize(n, 0);
-        for (int i = 0; i &lt; n; ++i)
-            parent[i] = i;
-    }
-
-    int find(int u) {
-        if (parent[u] != u)
-            parent[u] = find(parent[u]); // Path compression
-        return parent[u];
-    }
-
-    void unionSet(int u, int v) {
-        int rootU = find(u);
-        int rootV = find(v);
-
-        if (rootU != rootV) {
-            if (rank[rootU] &gt; rank[rootV])
-                parent[rootV] = rootU;
-            else if (rank[rootU] &lt; rank[rootV])
-                parent[rootU] = rootV;
-            else {
-                parent[rootV] = rootU;
-                rank[rootU]++;
-            }
-        }
-    }
-};
-
-vector&lt;EdgeK&gt; kruskal(int V, vector&lt;EdgeK&gt;&amp; edges) {
-    sort(edges.begin(), edges.end(), [](EdgeK&amp; e1, EdgeK&amp; e2) {
-        return e1.weight &lt; e2.weight;
-    });
-
-    DisjointSet ds(V);
-    vector&lt;EdgeK&gt; mst;
-
-    for (const auto&amp; edge : edges) {
-        int u = edge.u, v = edge.v;
-
-        if (ds.find(u) != ds.find(v)) {
-            mst.push_back(edge);
-            ds.unionSet(u, v);
-        }
-    }
-
-    return mst;
-}
-
-int main() {
-    while (true) {
-        cout &lt;&lt; "\n--- Menu ---\n";
-        cout &lt;&lt; "1. Disaster Impact Mapping\n";
-        cout &lt;&lt; "2. Dijkstra's Algorithm\n";
-        cout &lt;&lt; "3. Kruskal's Algorithm\n";
-        cout &lt;&lt; "4. Exit\n";
-        cout &lt;&lt; "Enter your choice: ";
-        int choice;
-        cin &gt;&gt; choice;
-
-        if (choice == 1) {
-            DisasterImpactMapping disasterMapping;
-            while (true) {
-                cout &lt;&lt; "\n--- Disaster Impact Mapping ---\n";
-                cout &lt;&lt; "1. Add/Update Zone\n";
-                cout &lt;&lt; "2. Get Zone Severity\n";
-                cout &lt;&lt; "3. Remove Zone\n";
-                cout &lt;&lt; "4. Display All Zones\n";
-                cout &lt;&lt; "5. Back to Main Menu\n";
-                cout &lt;&lt; "Enter your choice: ";
-                int subChoice;
-                cin &gt;&gt; subChoice;
-
-                if (subChoice == 1) {
-                    string zone, severity;
-                    cout &lt;&lt; "Enter Zone ID: ";
-                    cin &gt;&gt; zone;
-                    cout &lt;&lt; "Enter Severity Level (High, Medium, Low): ";
-                    cin &gt;&gt; severity;
-                    disasterMapping.addOrUpdateZone(zone, severity);
-                } else if (subChoice == 2) {
-                    string zone;
-                    cout &lt;&lt; "Enter Zone ID: ";
-                    cin &gt;&gt; zone;
-                    cout &lt;&lt; "Severity: " &lt;&lt; disasterMapping.getZoneSeverity(zone) &lt;&lt; endl;
-                } else if (subChoice == 3) {
-                    string zone;
-                    cout &lt;&lt; "Enter Zone ID: ";
-                    cin &gt;&gt; zone;
-                    disasterMapping.removeZone(zone);
-                } else if (subChoice == 4) {
-                    disasterMapping.displayAllZones();
-                } else if (subChoice == 5) {
-                    break;
+            function union(u, v) {
+                let rootU = find(u), rootV = find(v);
+                if (rootU !== rootV) {
+                    if (rank[rootU] < rank[rootV]) {
+                        parent[rootU] = rootV;
+                    } else if (rank[rootU] > rank[rootV]) {
+                        parent[rootV] = rootU;
+                    } else {
+                        parent[rootV] = rootU;
+                        rank[rootU]++;
+                    }
                 }
             }
-        } else if (choice == 2) {
-            int V;
-            cout &lt;&lt; "Enter the number of vertices: ";
-            cin &gt;&gt; V;
 
-            vector&lt;vector&lt;Edge&gt;&gt; graph(V);
-            int edges;
-            cout &lt;&lt; "Enter the number of edges: ";
-            cin &gt;&gt; edges;
-            cout &lt;&lt; "Enter edges (u v weight):\n
+            for (let i = 0; i < n; i++) {
+                parent[i] = i;
+                rank[i] = 0;
+            }
+
+            edges.sort((a, b) => a.weight - b.weight);
+
+            for (let edge of edges) {
+                let rootSrc = find(edge.src);
+                let rootDest = find(edge.dest);
+                if (rootSrc !== rootDest) {
+                    mstCost += edge.weight;
+                    mstEdges.push(edge);
+                    union(rootSrc, rootDest);
+                }
+            }
+
+            let result = "Edges in the MST:\n";
+            for (let edge of mstEdges) {
+                result += `${edge.src} -- ${edge.dest} == ${edge.weight}\n`;
+            }
+            result += `Total cost of MST: ${mstCost}`;
+            document.getElementById("result").textContent = result;
+        }
+
+        // Dijkstra's Algorithm Implementation
+        function runDijkstra() {
+            const graph = [
+                [[2, 1], [4, 2]],
+                [[1, 2], [7, 3]],
+                [[3, 3], [1, 4]],
+                [[2, 5]],
+                [[5, 5]]
+            ];
+            const n = 6;
+            const dist = Array(n).fill(Infinity);
+            const pq = [];
+
+            dist[0] = 0;
+            pq.push([0, 0]);
+
+            while (pq.length > 0) {
+                pq.sort((a, b) => a[0] - b[0]);
+                const [d, u] = pq.shift();
+
+                if (d > dist[u]) continue;
+
+                for (let [weight, v] of graph[u]) {
+                    if (dist[u] + weight < dist[v]) {
+                        dist[v] = dist[u] + weight;
+                        pq.push([dist[v], v]);
+                    }
+                }
+            }
+
+            let result = "Shortest distances from node 0:\n";
+            for (let i = 0; i < n; i++) {
+                result += `To node ${i}: ${dist[i] === Infinity ? -1 : dist[i]}\n`;
+            }
+            document.getElementById("result").textContent = result;
+        }
+
+        // Heap Sort Implementation
+        function runHeapSort() {
+            const tasks = [
+                [1, 34],
+                [2, 0],
+                [3, 45],
+                [4, 6],
+                [5, 5]
+            ];
+
+            function heapify(arr, n, i) {
+                let largest = i;
+                let left = 2 * i + 1;
+                let right = 2 * i + 2;
+
+                if (left < n && arr[left][1] > arr[largest][1]) {
+                    largest = left;
+                }
+
+                if (right < n && arr[right][1] > arr[largest][1]) {
+                    largest = right;
+                }
+
+                if (largest !== i) {
+                    [arr[i], arr[largest]] = [arr[largest], arr[i]];
+                    heapify(arr, n, largest);
+                }
+            }
+
+            function heapSort(arr) {
+                const n = arr.length;
+
+                for (let i = Math.floor(n / 2) - 1; i >= 0; i--) {
+                    heapify(arr, n, i);
+                }
+
+                for (let i = n - 1; i >= 0; i--) {
+                    [arr[0], arr[i]] = [arr[i], arr[0]];
+                    heapify(arr, i, 0);
+                }
+            }
+
+            heapSort(tasks);
+
+            let result = "After sorting (by priority):\n";
+            for (let task of tasks) {
+                result += `Task: ${task[0]}, Priority: ${task[1]}\n`;
+            }
+            document.getElementById("result").textContent = result;
+        }
+
+        // Exit Program
+        function exitProgram() {
+            document.getElementById("result").textContent = "Exiting program...";
+        }
+    </script>
+
+</body>
+</html>
